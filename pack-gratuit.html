@@ -854,22 +854,13 @@
     const heroForm = document.getElementById('hero-form');
     const finalForm = document.getElementById('final-form');
 
-    /* Remplacer par ton Form ID Loops (Forms > ton formulaire > ID dans l'URL) */
-    var LOOPS_FORM_ID = 'cmm7i6nja00bd0i2vpvo9b72z';
+    var WEBHOOK_URL = 'https://production.agify.fr/webhook/lawia/website/skills';
 
-    function showSuccess(form) {
-      var btn = form.querySelector('.btn-primary');
-      var input = form.querySelector('input[type="email"]');
-      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Envoy\u00e9\u00a0!';
-      btn.style.background = 'var(--green)';
-      btn.style.pointerEvents = 'none';
-      input.disabled = true;
-      input.style.opacity = '0.6';
-    }
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    function showError(form) {
+    function showError(form, msg) {
       var btn = form.querySelector('.btn-primary');
-      btn.innerHTML = 'Erreur, r\u00e9essayez';
+      btn.innerHTML = msg || 'Erreur, r\u00e9essayez';
       btn.style.background = 'var(--red, #c0392b)';
       setTimeout(function () {
         btn.innerHTML = 'Recevoir le pack <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -880,21 +871,27 @@
 
     async function handleFormSubmit(e) {
       e.preventDefault();
-      var email = e.target.querySelector('input[type="email"]').value;
+      var email = e.target.querySelector('input[type="email"]').value.trim();
+
+      if (!emailRegex.test(email)) {
+        showError(e.target, 'Email invalide');
+        return;
+      }
+
       var btn = e.target.querySelector('.btn-primary');
       btn.style.pointerEvents = 'none';
       btn.innerHTML = 'Envoi\u2026';
 
       try {
-        var res = await fetch('https://app.loops.so/api/newsletter-form/' + LOOPS_FORM_ID, {
+        var res = await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, mailingLists: { cmm7lrf99swh90j343p631ktr: true } })
+          body: JSON.stringify({ action: 'subscribe', email: email })
         });
 
         if (!res.ok) throw new Error(res.status);
 
-        window.location.href = 'merci.html';
+        window.location.href = 'bienvenue.html?email=' + encodeURIComponent(email);
       } catch (err) {
         showError(e.target);
       }

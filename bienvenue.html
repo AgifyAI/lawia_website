@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Une derni&egrave;re &eacute;tape | LawIA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .site-nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .site-nav-logo span {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        padding: 0 var(--space-md);
+      }
+    }
+
+    /* Layout */
+    .bienvenue-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(60px + var(--space-2xl)) var(--space-xl) var(--space-2xl);
+      background: var(--bg);
+    }
+
+    .bienvenue-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      max-width: 920px;
+      width: 100%;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .bienvenue-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    /* Left column : context */
+    .bienvenue-context {
+      padding-right: var(--space-xl);
+    }
+
+    @media (max-width: 768px) {
+      .bienvenue-context {
+        padding-right: 0;
+        text-align: center;
+      }
+    }
+
+    .bienvenue-context .tag {
+      margin-bottom: var(--space-lg);
+    }
+
+    .bienvenue-context h1 {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      margin-bottom: var(--space-lg);
+    }
+
+    .bienvenue-context p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .step-tracker {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      max-width: 280px;
+      margin-top: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      .step-tracker {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    .step-tracker-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      flex-shrink: 0;
+    }
+
+    .step-dot.done {
+      background: var(--green);
+    }
+
+    .step-dot.active {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border-strong);
+    }
+
+    .step-line.done {
+      background: var(--green);
+    }
+
+    .step-tracker-labels {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      color: var(--text-tertiary);
+    }
+
+    .step-tracker-labels span {
+      text-align: center;
+    }
+
+    .step-tracker-labels span:first-child {
+      text-align: left;
+    }
+
+    .step-tracker-labels span:last-child {
+      text-align: right;
+    }
+
+    .step-tracker-labels span.current {
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    /* Right column : form */
+    .bienvenue-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238A8A82' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .bienvenue-card .btn-primary {
+      width: 100%;
+    }
+
+    .skip-link {
+      display: block;
+      text-align: center;
+      margin-top: var(--space-lg);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .skip-link:hover {
+      color: var(--accent-dark);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-logo">LAW<span>IA</span></a>
+  </nav>
+
+  <main class="bienvenue-page">
+    <div class="bienvenue-layout">
+
+      <!-- Left : context -->
+      <div class="bienvenue-context anim-slide-up">
+        <span class="tag">Derni&egrave;re &eacute;tape</span>
+        <h1>Dites-nous en un peu plus sur vous</h1>
+        <p>
+          On utilise ces informations pour vous pr&eacute;parer des <strong>contenus adapt&eacute;s &agrave; votre
+            domaine d'exercice</strong>. Un p&eacute;naliste et un civiliste n'ont pas les m&ecirc;mes besoins.
+        </p>
+
+        <div class="step-tracker">
+          <div class="step-tracker-bar">
+            <span class="step-dot done"></span>
+            <span class="step-line done"></span>
+            <span class="step-dot active"></span>
+            <span class="step-line"></span>
+            <span class="step-dot"></span>
+          </div>
+          <div class="step-tracker-labels">
+            <span>Email</span>
+            <span class="current">Votre profil</span>
+            <span>Confirmation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right : form -->
+      <div class="bienvenue-card anim-slide-left">
+        <form id="info-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Pr&eacute;nom</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Jean" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Nom</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Dupont" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="statut">Vous &ecirc;tes</label>
+            <select id="statut" name="statut" required>
+              <option value="" disabled selected>S&eacute;lectionnez votre statut</option>
+              <option value="avocat_cabinet">Avocat(e) en cabinet</option>
+              <option value="eleve_avocat">&Eacute;l&egrave;ve avocat(e)</option>
+              <option value="juriste_entreprise">Juriste d'entreprise</option>
+              <option value="etudiant_droit">&Eacute;tudiant(e) en droit</option>
+              <option value="commissaire_justice">Commissaire de justice</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="specialite">Sp&eacute;cialit&eacute;</label>
+            <select id="specialite" name="specialite" required>
+              <option value="" disabled selected>Type de droit</option>
+              <option value="civil">Droit civil</option>
+              <option value="affaires">Droit des affaires</option>
+              <option value="penal">Droit p&eacute;nal</option>
+              <option value="social">Droit social / travail</option>
+              <option value="immobilier">Droit immobilier</option>
+              <option value="famille">Droit de la famille</option>
+              <option value="fiscal">Droit fiscal</option>
+              <option value="propriete_intellectuelle">Propri&eacute;t&eacute; intellectuelle</option>
+              <option value="public">Droit public</option>
+              <option value="numerique">Droit du num&eacute;rique</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary" id="info-submit">
+            Recevoir mon pack
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="styles/base.js"></script>
+  <script>
+    var WEBHOOK_URL = 'https://production.agify.fr/webhook/lawia/website/skills';
+
+    var params = new URLSearchParams(window.location.search);
+    var userEmail = params.get('email') || '';
+
+    document.getElementById('info-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('info-submit');
+      btn.style.pointerEvents = 'none';
+      btn.innerHTML = 'Envoi\u2026';
+
+      try {
+        var res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_profile',
+            email: userEmail,
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            jobTitle: document.getElementById('statut').value,
+            specialty: document.getElementById('specialite').value
+          })
+        });
+
+        if (!res.ok) throw new Error(res.status);
+
+        window.location.href = 'merci.html';
+      } catch (err) {
+        btn.innerHTML = 'Erreur, r\u00e9essayez';
+        btn.style.background = 'var(--red, #c0392b)';
+        setTimeout(function () {
+          btn.innerHTML = 'Recevoir mon pack <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          btn.style.background = '';
+          btn.style.pointerEvents = '';
+        }, 3000);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
