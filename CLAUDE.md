@@ -1,0 +1,1 @@
+Interdiciton d'utiliser TOUS les cadratins, em dashes, tirets , etc. Reformule la phrases'il le faut (parathèses, ":", etc.)

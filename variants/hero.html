@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawIA : Variantes Hero</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <style>
+    /* ============================================================
+       Hero Variants : Page-specific styles
+       ============================================================ */
+
+    /* ---- V1 : Centered Minimal ---- */
+    #v1 .v1-inner {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    #v1 .v1-headline {
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: var(--space-xl);
+    }
+
+    #v1 .v1-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.15rem, 2vw, 1.35rem);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    #v1 .v1-proof {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: var(--space-xl);
+      letter-spacing: 0.01em;
+    }
+
+    #v1 .v1-proof strong {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* ---- V2 : Split with Mockup ---- */
+    #v2 .v2-grid {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      gap: var(--space-3xl);
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    #v2 .v2-text .v2-tag {
+      margin-bottom: var(--space-lg);
+    }
+
+    #v2 .v2-text h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      margin-bottom: var(--space-lg);
+    }
+
+    #v2 .v2-text p {
+      margin-bottom: var(--space-2xl);
+      max-width: 480px;
+    }
+
+    #v2 .v2-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    #v2 .v2-mockup .window-body {
+      min-height: 280px;
+    }
+
+    #v2 .v2-mockup .skill-line {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    #v2 .v2-mockup .skill-line:last-child {
+      border-bottom: none;
+    }
+
+    #v2 .v2-mockup .skill-icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    #v2 .v2-mockup .skill-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    #v2 .v2-mockup .skill-status {
+      margin-left: auto;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-family: var(--font-ui);
+    }
+
+    @media (max-width: 768px) {
+      #v2 .v2-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+    }
+
+    /* ---- V3 : Floating Skill Cards ---- */
+    #v3.variant-section {
+      padding-top: 0;
+    }
+
+    #v3 .v3-inner {
+      position: relative;
+      text-align: center;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #v3 .v3-headline {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      max-width: 700px;
+      margin-bottom: var(--space-lg);
+      position: relative;
+      z-index: 2;
+    }
+
+    #v3 .v3-subtitle {
+      max-width: 520px;
+      margin: 0 auto var(--space-2xl);
+      position: relative;
+      z-index: 2;
+    }
+
+    #v3 .v3-cta-area {
+      position: relative;
+      z-index: 2;
+    }
+
+    #v3 .v3-cards-orbit {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #v3 .v3-skill-card {
+      position: absolute;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-md);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      pointer-events: auto;
+      transition: box-shadow var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+    }
+
+    #v3 .v3-skill-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: scale(1.05);
+    }
+
+    #v3 .v3-skill-card .v3-card-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: var(--space-sm);
+    }
+
+    #v3 .v3-skill-card:nth-child(1) {
+      top: 4%;
+      left: 2%;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    #v3 .v3-skill-card:nth-child(2) {
+      top: 2%;
+      right: 3%;
+      animation: float 6s ease-in-out 0.5s infinite;
+    }
+
+    #v3 .v3-skill-card:nth-child(3) {
+      bottom: 8%;
+      left: 1%;
+      animation: float 5.5s ease-in-out 1s infinite;
+    }
+
+    #v3 .v3-skill-card:nth-child(4) {
+      bottom: 5%;
+      right: 2%;
+      animation: float 6.5s ease-in-out 1.5s infinite;
+    }
+
+    #v3 .v3-skill-card:nth-child(5) {
+      top: 50%;
+      right: -2%;
+      transform: translateY(-50%);
+      animation: float 5.8s ease-in-out 0.8s infinite;
+    }
+
+    @media (max-width: 768px) {
+      #v3 .v3-skill-card {
+        display: none;
+      }
+    }
+
+    /* ---- V4 : Bold Typography / Stacked Words ---- */
+    #v4 .v4-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    #v4 .v4-stacked {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    #v4 .v4-stacked .v4-line-accent {
+      color: var(--accent);
+    }
+
+    #v4 .v4-accent-line {
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: var(--space-2xl) 0;
+    }
+
+    #v4 .v4-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: var(--space-2xl);
+    }
+
+    #v4 .v4-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    #v4 .v4-meta-item {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    #v4 .v4-meta-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+
+    /* ---- V5 : Before/After Split ---- */
+    #v5 .v5-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    #v5 .v5-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    #v5 .v5-header h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      margin-bottom: var(--space-md);
+    }
+
+    #v5 .v5-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    #v5 .v5-col {
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    #v5 .v5-col-before {
+      background: #F0EDEA;
+      border: 1px solid rgba(20, 20, 19, 0.08);
+    }
+
+    #v5 .v5-col-after {
+      background: rgba(106, 155, 204, 0.08);
+      border: 1px solid rgba(106, 155, 204, 0.18);
+    }
+
+    #v5 .v5-col-title {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-xl);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    #v5 .v5-col-before .v5-col-title {
+      color: var(--red);
+    }
+
+    #v5 .v5-col-after .v5-col-title {
+      color: var(--accent-dark);
+    }
+
+    #v5 .v5-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    #v5 .v5-list li {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    #v5 .v5-list li svg {
+      flex-shrink: 0;
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+    }
+
+    #v5 .v5-col-before .v5-list li svg {
+      color: var(--red);
+    }
+
+    #v5 .v5-col-after .v5-list li svg {
+      color: var(--green);
+    }
+
+    #v5 .v5-col-before .v5-list li {
+      color: var(--text-secondary);
+    }
+
+    #v5 .v5-col-after .v5-list li {
+      color: var(--text);
+    }
+
+    #v5 .v5-bottom-cta {
+      text-align: center;
+      margin-top: var(--space-3xl);
+    }
+
+    @media (max-width: 768px) {
+      #v5 .v5-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V6 : Terminal/Interface ---- */
+    #v6 .v6-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      text-align: center;
+    }
+
+    #v6 .v6-window {
+      margin-bottom: var(--space-3xl);
+      text-align: left;
+    }
+
+    #v6 .v6-window .window-body {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    #v6 .v6-prompt-area {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    #v6 .v6-prompt-label {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+    }
+
+    #v6 .v6-typing-line {
+      font-size: 0.95rem;
+      color: var(--text);
+      min-height: 1.5em;
+      border-right: 2px solid var(--text);
+      animation: blink-caret 0.8s step-end infinite;
+      display: inline-block;
+      width: fit-content;
+      padding-right: 2px;
+    }
+
+    #v6 .v6-skill-loaded {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-md) var(--space-lg);
+      background: rgba(92, 160, 110, 0.08);
+      border: 1px solid rgba(92, 160, 110, 0.2);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    #v6 .v6-skill-loaded svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    #v6 .v6-response-preview {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--border);
+    }
+
+    #v6 .v6-below h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      margin-bottom: var(--space-lg);
+    }
+
+    #v6 .v6-below p {
+      max-width: 520px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    /* ---- V7 : Stats-Led ---- */
+    #v7 .v7-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+      text-align: center;
+    }
+
+    #v7 .v7-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+      margin-bottom: var(--space-4xl);
+    }
+
+    #v7 .v7-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    #v7 .v7-stat .stat-value {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    #v7 .v7-stat .stat-label {
+      max-width: 160px;
+    }
+
+    #v7 .v7-headline {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      margin-bottom: var(--space-lg);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #v7 .v7-subtitle {
+      max-width: 520px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      #v7 .v7-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      #v7 .v7-stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation
+       ============================================================ -->
+  <nav class="variant-nav">
+    <span class="nav-title">Hero</span>
+    <a href="#v1" class="active">V1 : Centred</a>
+    <a href="#v2">V2 : Split</a>
+    <a href="#v3">V3 : Cards</a>
+    <a href="#v4">V4 : Typo Bold</a>
+    <a href="#v5">V5 : Avant/Apres</a>
+    <a href="#v6">V6 : Interface</a>
+    <a href="#v7">V7 : Stats</a>
+  </nav>
+
+  <!-- ============================================================
+       V1 : Centered Minimal
+       ============================================================ -->
+  <section class="variant-section" id="v1">
+    <span class="variant-label">V1 : Centered Minimal</span>
+
+    <div class="v1-inner stagger">
+
+      <span class="tag anim-fade-in">Pack de 5 Skills Claude pour avocats</span>
+
+      <h1 class="v1-headline anim-slide-up mt-xl">
+        Lundi, Claude structure vos conclusions parfaitement.<br>
+        Mardi, il faut tout lui r&eacute;expliquer.
+      </h1>
+
+      <p class="v1-subtitle anim-slide-up">
+        Les Skills suppriment le re-prompting. Des instructions permanentes que Claude m&eacute;morise : r&eacute;sultats constants, sans effort, d&egrave;s la premi&egrave;re utilisation.
+      </p>
+
+      <div class="anim-scale-in">
+        <a href="#" class="btn-primary">
+          Obtenir les 5 Skills pour 150&nbsp;&euro;
+        </a>
+      </div>
+
+      <p class="v1-proof anim-fade-in mt-xl">
+        Con&ccedil;u par <strong>Me Patrice Humbert</strong>, 20 ans de barreau, ~1&nbsp;000 avocats form&eacute;s
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V2 : Split with Mockup
+       ============================================================ -->
+  <section class="variant-section" id="v2">
+    <span class="variant-label">V2 : Split avec Mockup</span>
+
+    <div class="v2-grid">
+
+      <!-- Left : Text -->
+      <div class="v2-text stagger">
+
+        <span class="tag anim-fade-in v2-tag">5 Skills Claude pr&ecirc;ts &agrave; l'emploi</span>
+
+        <h1 class="anim-slide-up">
+          En 3 minutes, b&eacute;n&eacute;ficiez du fruit de 3 ans de R&amp;D IA juridique
+        </h1>
+
+        <p class="anim-slide-up">
+          Vous ouvrez Claude, vous demandez de structurer vos conclusions. Lundi il fait un travail correct. Mardi, tout change. 20 minutes perdues &agrave; tout r&eacute;expliquer. Les Skills r&egrave;glent ce probl&egrave;me d&eacute;finitivement.
+        </p>
+
+        <div class="v2-actions anim-slide-up">
+          <a href="#" class="btn-primary">Obtenir le pack (150&nbsp;&euro;)</a>
+          <a href="#" class="btn-ghost">
+            D&eacute;couvrir les 5 Skills
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5-5-5-5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right : Window mockup -->
+      <div class="v2-mockup anim-scale-in">
+        <div class="window-mockup">
+          <div class="window-header">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Claude Desktop</span>
+          </div>
+          <div class="window-body">
+            <div class="skill-line">
+              <span class="skill-icon"></span>
+              <span class="skill-name">Conventions d'honoraires</span>
+              <span class="skill-status">charg&eacute;</span>
+            </div>
+            <div class="skill-line">
+              <span class="skill-icon"></span>
+              <span class="skill-name">Contre-argumentation</span>
+              <span class="skill-status">charg&eacute;</span>
+            </div>
+            <div class="skill-line">
+              <span class="skill-icon"></span>
+              <span class="skill-name">Conclusions au fond</span>
+              <span class="skill-status">charg&eacute;</span>
+            </div>
+            <div class="skill-line">
+              <span class="skill-icon"></span>
+              <span class="skill-name">Mise en demeure</span>
+              <span class="skill-status">charg&eacute;</span>
+            </div>
+            <div class="skill-line">
+              <span class="skill-icon"></span>
+              <span class="skill-name">Analyse jurisprudentielle</span>
+              <span class="skill-status">charg&eacute;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V3 : Floating Skill Cards
+       ============================================================ -->
+  <section class="variant-section" id="v3">
+    <span class="variant-label">V3 : Floating Skill Cards</span>
+
+    <div class="v3-inner">
+
+      <!-- Floating cards -->
+      <div class="v3-cards-orbit">
+        <div class="v3-skill-card anim-fade-in">
+          <span class="v3-card-dot"></span>Conventions d'honoraires
+        </div>
+        <div class="v3-skill-card anim-fade-in">
+          <span class="v3-card-dot"></span>Contre-argumentation
+        </div>
+        <div class="v3-skill-card anim-fade-in">
+          <span class="v3-card-dot"></span>Conclusions au fond
+        </div>
+        <div class="v3-skill-card anim-fade-in">
+          <span class="v3-card-dot"></span>Mise en demeure
+        </div>
+        <div class="v3-skill-card anim-fade-in">
+          <span class="v3-card-dot"></span>Analyse jurisprudentielle
+        </div>
+      </div>
+
+      <!-- Central content -->
+      <span class="tag anim-fade-in">5 Skills Claude pour avocats</span>
+
+      <h1 class="v3-headline anim-slide-up mt-xl">
+        Vos instructions juridiques, m&eacute;moris&eacute;es par Claude pour toujours
+      </h1>
+
+      <p class="v3-subtitle anim-slide-up">
+        Chaque Skill encode une expertise pr&eacute;cise : droit fran&ccedil;ais, structure conforme, z&eacute;ro hallucination. Installez les 5 en 3 minutes, utilisez-les ind&eacute;finiment.
+      </p>
+
+      <div class="v3-cta-area anim-scale-in">
+        <a href="#" class="btn-primary">T&eacute;l&eacute;charger les 5 Skills</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V4 : Bold Typography / Stacked Words
+       ============================================================ -->
+  <section class="variant-section" id="v4">
+    <span class="variant-label">V4 : Bold Typography</span>
+
+    <div class="v4-inner stagger">
+
+      <div class="v4-stacked anim-blur-in">
+        <div>ARR&Ecirc;TEZ</div>
+        <div>DE RE-</div>
+        <div class="v4-line-accent">PROMPTER.</div>
+      </div>
+
+      <div class="v4-accent-line anim-scale-in"></div>
+
+      <p class="v4-subtitle anim-slide-up">
+        5 Skills Claude con&ccedil;us par un avocat, pour les avocats. Instructions permanentes, r&eacute;sultats constants, droit fran&ccedil;ais garanti. 150&nbsp;&euro;, paiement unique.
+      </p>
+
+      <div class="anim-slide-up">
+        <a href="#" class="btn-primary">Obtenir les Skills (150&nbsp;&euro;)</a>
+      </div>
+
+      <div class="v4-meta anim-fade-in">
+        <span class="v4-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Me Patrice Humbert
+        </span>
+        <span class="v4-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+          20 ans de barreau
+        </span>
+        <span class="v4-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          ~1 000 avocats form&eacute;s
+        </span>
+        <span class="v4-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Finaliste concours CNB IA
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V5 : Before/After Split
+       ============================================================ -->
+  <section class="variant-section" id="v5">
+    <span class="variant-label">V5 : Avant / Apr&egrave;s</span>
+
+    <div class="v5-inner">
+
+      <div class="v5-header stagger">
+        <span class="tag anim-fade-in">La diff&eacute;rence est imm&eacute;diate</span>
+        <h1 class="anim-slide-up mt-lg">Claude sans Skills vs. Claude avec Skills</h1>
+      </div>
+
+      <div class="v5-columns">
+
+        <!-- Before -->
+        <div class="v5-col v5-col-before anim-slide-up">
+          <div class="v5-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            Sans Skills
+          </div>
+          <ul class="v5-list stagger">
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span>Re-prompting &agrave; chaque nouvelle conversation</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span>R&eacute;sultats inconstants d'un jour &agrave; l'autre</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span>Risque d'hallucinations (Common Law, sources fictives)</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span>20 minutes perdues en explications &agrave; chaque session</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span>Aucune garantie de conformit&eacute; au droit fran&ccedil;ais</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- After -->
+        <div class="v5-col v5-col-after anim-slide-up">
+          <div class="v5-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Avec Skills
+          </div>
+          <ul class="v5-list stagger">
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Instructions permanentes, z&eacute;ro configuration</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>R&eacute;sultats constants et fiables &agrave; chaque utilisation</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Cadrage strict sur le droit fran&ccedil;ais (z&eacute;ro Common Law)</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Pr&ecirc;t &agrave; travailler d&egrave;s l'ouverture de Claude</span>
+            </li>
+            <li class="anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>3 ans de R&amp;D juridique condens&eacute;s en 5 Skills</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="v5-bottom-cta stagger">
+        <p class="anim-fade-in text-secondary font-ui" style="font-size: 0.9rem; margin-bottom: var(--space-lg);">
+          150&nbsp;&euro;, paiement unique. Installation en 3 minutes.
+        </p>
+        <div class="anim-scale-in">
+          <a href="#" class="btn-primary">Passer aux Skills</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V6 : Terminal / Interface
+       ============================================================ -->
+  <section class="variant-section" id="v6">
+    <span class="variant-label">V6 : Interface</span>
+
+    <div class="v6-inner">
+
+      <!-- Large window mockup -->
+      <div class="v6-window anim-scale-in">
+        <div class="window-mockup">
+          <div class="window-header">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Claude Desktop</span>
+          </div>
+          <div class="window-body">
+
+            <!-- Skill loaded indicator -->
+            <div class="v6-skill-loaded anim-fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>Skill actif : Conclusions au fond</span>
+            </div>
+
+            <!-- Typing prompt -->
+            <div class="v6-prompt-area">
+              <span class="v6-prompt-label">Votre demande</span>
+              <span class="v6-typing-line" data-typing="R&eacute;dige mes conclusions au fond pour le dossier Martin c/ SCI Les Oliviers..." data-typing-speed="35" data-typing-delay="800"></span>
+            </div>
+
+            <!-- Response preview -->
+            <div class="v6-response-preview anim-fade-in">
+              <strong style="color: var(--text);">Claude</strong>&nbsp;&nbsp;·&nbsp;&nbsp;Skill &laquo;&nbsp;Conclusions au fond&nbsp;&raquo; appliqu&eacute;<br>
+              Structure conforme au droit fran&ccedil;ais, jurisprudence v&eacute;rifi&eacute;e, argumentation compl&egrave;te...
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Below : headline + CTA -->
+      <div class="v6-below stagger">
+        <h1 class="anim-slide-up">
+          Claude sait d&eacute;j&agrave; comment travailler pour vous
+        </h1>
+        <p class="anim-slide-up">
+          Gr&acirc;ce aux Skills, plus besoin de r&eacute;p&eacute;ter vos instructions. Ouvrez Claude, posez votre question : il conna&icirc;t d&eacute;j&agrave; vos exigences d'avocat.
+        </p>
+        <div class="anim-scale-in">
+          <a href="#" class="btn-primary">Obtenir les 5 Skills (150&nbsp;&euro;)</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V7 : Stats-Led
+       ============================================================ -->
+  <section class="variant-section" id="v7">
+    <span class="variant-label">V7 : Stats</span>
+
+    <div class="v7-inner">
+
+      <!-- Stats row -->
+      <div class="v7-stats-row stagger">
+
+        <div class="v7-stat anim-slide-up">
+          <span class="stat-value" data-count-to="20" data-count-suffix="+">0</span>
+          <span class="stat-label">ann&eacute;es de barreau</span>
+        </div>
+
+        <div class="v7-stat anim-slide-up">
+          <span class="stat-value" data-count-to="1000" data-count-suffix="">0</span>
+          <span class="stat-label">avocats form&eacute;s</span>
+        </div>
+
+        <div class="v7-stat anim-slide-up">
+          <span class="stat-value" data-count-to="5" data-count-suffix="">0</span>
+          <span class="stat-label">skills pr&ecirc;ts &agrave; l'emploi</span>
+        </div>
+
+        <div class="v7-stat anim-slide-up">
+          <span class="stat-value" data-count-to="3" data-count-suffix=" min">0</span>
+          <span class="stat-label">d'installation</span>
+        </div>
+
+      </div>
+
+      <!-- Headline -->
+      <h1 class="v7-headline anim-slide-up">
+        L'expertise de Me Humbert, inject&eacute;e directement dans votre Claude
+      </h1>
+
+      <p class="v7-subtitle anim-slide-up">
+        Finaliste du concours CNB sur l'IA, Ma&icirc;tre Humbert a condens&eacute; 3 ans de R&amp;D en 5 Skills qui &eacute;liminent le re-prompting, les hallucinations et les erreurs de droit applicable.
+      </p>
+
+      <div class="anim-scale-in">
+        <a href="#" class="btn-primary">T&eacute;l&eacute;charger le pack (150&nbsp;&euro;)</a>
+      </div>
+
+      <p class="anim-fade-in mt-xl" style="font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-tertiary);">
+        Paiement unique. Compatible Claude Desktop et claude.ai.
+      </p>
+
+    </div>
+  </section>
+
+  <script src="../styles/base.js"></script>
+</body>
+</html>

@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawIA — Variantes Section Problème</title>
+  <link rel="stylesheet" href="../styles/base.css">
+
+  <style>
+    /* ============================================================
+       Problem Variants — Page-specific styles
+       ============================================================ */
+
+    /* ---- Shared ---- */
+    .problem-tag {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      background: rgba(196, 92, 92, 0.10);
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+    }
+
+    .problem-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+
+    .variant-inner {
+      width: 100%;
+      padding: var(--space-4xl) 0;
+    }
+
+    /* ============================================================
+       V1 — Timeline Narrative
+       ============================================================ */
+    #v1 .timeline {
+      position: relative;
+      display: flex;
+      gap: var(--space-md);
+      overflow-x: auto;
+      padding: var(--space-xl) 0 var(--space-2xl);
+      scrollbar-width: thin;
+    }
+
+    #v1 .timeline::before {
+      content: '';
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--border-strong), var(--red));
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    #v1 .timeline-day {
+      flex: 1;
+      min-width: 190px;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    #v1 .timeline-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--red);
+      margin: 42px auto 0;
+      position: relative;
+      z-index: 2;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v1 .timeline-day:last-child .timeline-dot {
+      background: var(--red);
+      box-shadow: 0 0 0 6px rgba(196, 92, 92, 0.18);
+    }
+
+    #v1 .timeline-label {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-xs);
+    }
+
+    #v1 .timeline-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-top: var(--space-lg);
+      text-align: left;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v1 .timeline-day:hover .timeline-card {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(196, 92, 92, 0.3);
+    }
+
+    #v1 .timeline-icon {
+      font-size: 1.6rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    #v1 .timeline-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    #v1 .timeline-card p {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    #v1 .timeline-frustration {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--red);
+    }
+
+    #v1 .frustration-bar {
+      height: 4px;
+      background: var(--red);
+      border-radius: 2px;
+      transition: width var(--dur-slower) var(--ease-out);
+    }
+
+    #v1 .timeline-cta {
+      text-align: center;
+      margin-top: var(--space-3xl);
+    }
+
+    #v1 .timeline-cta h3 {
+      color: var(--accent-dark);
+    }
+
+    /* ============================================================
+       V2 — Chat Mockup
+       ============================================================ */
+    #v2 .chat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      #v2 .chat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #v2 .chat-day-label {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      margin-bottom: var(--space-md);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+    }
+
+    #v2 .chat-day-label.monday {
+      color: var(--text-secondary);
+      background: var(--bg-alt);
+    }
+
+    #v2 .chat-day-label.tuesday {
+      color: var(--red);
+      background: rgba(196, 92, 92, 0.08);
+    }
+
+    #v2 .chat-msg {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    #v2 .chat-msg.user {
+      flex-direction: row-reverse;
+    }
+
+    #v2 .chat-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    #v2 .chat-avatar.ai {
+      background: linear-gradient(135deg, #D4A574, #C4956A);
+    }
+
+    #v2 .chat-avatar.human {
+      background: var(--accent);
+    }
+
+    #v2 .chat-bubble {
+      max-width: 85%;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    #v2 .chat-msg.user .chat-bubble {
+      background: var(--accent-light);
+      border: 1px solid rgba(106, 155, 204, 0.2);
+    }
+
+    #v2 .chat-msg.ai .chat-bubble {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+    }
+
+    #v2 .chat-highlight-bad {
+      background: rgba(196, 92, 92, 0.10);
+      color: var(--red);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      text-decoration: line-through;
+      text-decoration-color: var(--red);
+    }
+
+    #v2 .chat-highlight-good {
+      background: rgba(92, 160, 110, 0.10);
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+
+    #v2 .chat-diff-label {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      background: rgba(196, 92, 92, 0.10);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      margin-top: var(--space-sm);
+    }
+
+    #v2 .chat-verdict {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      padding: var(--space-xl);
+      background: rgba(196, 92, 92, 0.05);
+      border: 1px dashed var(--red);
+      border-radius: var(--radius-lg);
+    }
+
+    #v2 .chat-verdict p {
+      color: var(--red);
+      font-weight: 600;
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+    }
+
+    /* ============================================================
+       V3 — Pain Points Cards Grid
+       ============================================================ */
+    #v3 .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    @media (min-width: 1024px) {
+      #v3 .pain-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      #v3 .pain-grid .card:last-child {
+        grid-column: 2;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #v3 .pain-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #v3 .pain-grid .card {
+      position: relative;
+      overflow: hidden;
+      border-left: 3px solid var(--red);
+    }
+
+    #v3 .pain-grid .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(196, 92, 92, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    #v3 .pain-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    #v3 .pain-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: var(--space-sm);
+    }
+
+    #v3 .pain-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       V4 — Big Quote + Context
+       ============================================================ */
+    #v4 .quote-block {
+      position: relative;
+      padding: var(--space-3xl) 0;
+    }
+
+    #v4 .big-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.35;
+      text-align: center;
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #v4 .big-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.4em;
+      left: -0.3em;
+      font-size: 5em;
+      color: var(--red);
+      opacity: 0.15;
+      font-style: normal;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    #v4 .quote-source {
+      text-align: center;
+      margin-top: var(--space-lg);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    #v4 .context-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+
+    @media (max-width: 768px) {
+      #v4 .context-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #v4 .context-item {
+      text-align: center;
+      padding: var(--space-xl);
+    }
+
+    #v4 .context-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(196, 92, 92, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+      font-size: 1.3rem;
+    }
+
+    #v4 .context-item h4 {
+      font-size: 1rem;
+      margin-bottom: var(--space-sm);
+      color: var(--red);
+    }
+
+    #v4 .context-item p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       V5 — Numbers / Statistics
+       ============================================================ */
+    #v5 .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      #v5 .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+    }
+
+    #v5 .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v5 .stat-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    #v5 .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    #v5 .stat-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: var(--red);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    #v5 .stat-unit {
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--red);
+      opacity: 0.7;
+      margin-left: 4px;
+    }
+
+    #v5 .stat-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: var(--space-lg);
+      margin-bottom: var(--space-sm);
+    }
+
+    #v5 .stat-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    #v5 .stats-footnote {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       V6 — Checklist
+       ============================================================ */
+    #v6 .checklist {
+      max-width: 700px;
+      margin: var(--space-2xl) auto 0;
+    }
+
+    #v6 .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-lg) var(--space-xl);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      transition: all var(--dur-normal) var(--ease-out);
+      cursor: default;
+    }
+
+    #v6 .check-item:hover {
+      background: rgba(196, 92, 92, 0.04);
+    }
+
+    #v6 .check-box {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--red);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      transition: all var(--dur-normal) var(--ease-spring);
+      background: transparent;
+    }
+
+    #v6 .check-item.checked .check-box {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    #v6 .check-box svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--white);
+      stroke-width: 3;
+      fill: none;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all var(--dur-normal) var(--ease-spring);
+    }
+
+    #v6 .check-item.checked .check-box svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #v6 .check-text {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    #v6 .check-count {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--text-tertiary);
+    }
+
+    #v6 .check-count strong {
+      color: var(--red);
+      font-size: 1.3rem;
+    }
+
+    /* ============================================================
+       V7 — Split Before / After
+       ============================================================ */
+    #v7 .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: var(--space-2xl);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 768px) {
+      #v7 .split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #v7 .split-side {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    #v7 .split-before {
+      background: linear-gradient(160deg, #FDF6F3 0%, #FBF0EC 100%);
+      border-right: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      #v7 .split-before {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    #v7 .split-after {
+      background: linear-gradient(160deg, #F4F8FC 0%, #EDF4FA 100%);
+    }
+
+    #v7 .split-label {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: var(--space-xl);
+    }
+
+    #v7 .split-before .split-label {
+      color: var(--red);
+      background: rgba(196, 92, 92, 0.12);
+    }
+
+    #v7 .split-after .split-label {
+      color: var(--accent-dark);
+      background: var(--accent-light);
+    }
+
+    #v7 .split-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: var(--space-xl);
+      line-height: 1.3;
+    }
+
+    #v7 .split-before .split-title {
+      color: var(--red);
+    }
+
+    #v7 .split-after .split-title {
+      color: var(--accent-dark);
+    }
+
+    #v7 .split-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    #v7 .split-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    #v7 .split-list li .icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+
+    #v7 .split-before .split-list li .icon {
+      background: rgba(196, 92, 92, 0.12);
+      color: var(--red);
+    }
+
+    #v7 .split-after .split-list li .icon {
+      background: rgba(92, 160, 110, 0.12);
+      color: var(--green);
+    }
+
+    #v7 .split-divider-center {
+      display: none;
+    }
+
+    #v7 .split-cta {
+      text-align: center;
+      margin-top: var(--space-2xl);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation
+       ============================================================ -->
+  <nav class="variant-nav">
+    <span class="nav-title">Problème</span>
+    <a href="#v1">V1 Timeline</a>
+    <a href="#v2">V2 Chat</a>
+    <a href="#v3">V3 Grille</a>
+    <a href="#v4">V4 Citation</a>
+    <a href="#v5">V5 Chiffres</a>
+    <a href="#v6">V6 Checklist</a>
+    <a href="#v7">V7 Avant/Après</a>
+  </nav>
+
+  <!-- ============================================================
+       V1 — Timeline Narrative
+       ============================================================ -->
+  <section id="v1" class="variant-section">
+    <span class="variant-label">V1 — Timeline</span>
+    <div class="variant-inner">
+      <div class="container">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème</span>
+          <h2 class="problem-heading mt-lg">Chaque jour, le même recommencement</h2>
+          <p class="mt-md" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+            Lundi, mardi, mercredi, jeudi, vendredi : cinq jours, cinq fois tout reprendre à zéro avec Claude. Voici à quoi ressemble votre semaine.
+          </p>
+        </div>
+
+        <div class="timeline mt-2xl stagger">
+          <!-- Lundi -->
+          <div class="timeline-day anim-slide-up">
+            <span class="timeline-label">Lundi</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-icon">💬</span>
+              <h4>Nouvelle conversation</h4>
+              <p>Vous ouvrez Claude, vous expliquez votre méthodologie, vos standards de rédaction, le contexte du dossier...</p>
+              <div class="timeline-frustration">
+                <span>Frustration</span>
+                <div class="frustration-bar" style="width: 20%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mardi -->
+          <div class="timeline-day anim-slide-up">
+            <span class="timeline-label">Mardi</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-icon">🔄</span>
+              <h4>On recommence</h4>
+              <p>Même dossier, nouvelle conversation. Claude a tout oublié. Vous réexpliquez. Le format a changé, la logique aussi.</p>
+              <div class="timeline-frustration">
+                <span>Frustration</span>
+                <div class="frustration-bar" style="width: 40%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mercredi -->
+          <div class="timeline-day anim-slide-up">
+            <span class="timeline-label">Mercredi</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-icon">⚠️</span>
+              <h4>Première hallucination</h4>
+              <p>Claude cite un arrêt qui n'existe pas. Vous perdez 30 minutes à vérifier. Le doute s'installe sur tout le reste.</p>
+              <div class="timeline-frustration">
+                <span>Frustration</span>
+                <div class="frustration-bar" style="width: 65%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jeudi -->
+          <div class="timeline-day anim-slide-up">
+            <span class="timeline-label">Jeudi</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-icon">🇬🇧</span>
+              <h4>Common Law</h4>
+              <p>Vous demandez une analyse en droit français. Claude vous sort du Common Law. Vous plaidez à Marseille, pas à Londres.</p>
+              <div class="timeline-frustration">
+                <span>Frustration</span>
+                <div class="frustration-bar" style="width: 85%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vendredi -->
+          <div class="timeline-day anim-slide-up">
+            <span class="timeline-label">Vendredi</span>
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-icon">😤</span>
+              <h4>Abandon</h4>
+              <p>Vous renoncez. Tout rédiger vous-même prend moins de temps que de corriger les erreurs de l'IA. La promesse de productivité s'est envolée.</p>
+              <div class="timeline-frustration">
+                <span>Frustration</span>
+                <div class="frustration-bar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-cta anim-fade-in">
+          <h3>Et si vous pouviez arrêter ce cycle ?</h3>
+          <p class="mt-sm text-secondary">Il existe un moyen de ne plus jamais repartir de zéro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V2 — Chat Mockup
+       ============================================================ -->
+  <section id="v2" class="variant-section">
+    <span class="variant-label">V2 — Chat Mockup</span>
+    <div class="variant-inner">
+      <div class="container">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème</span>
+          <h2 class="problem-heading mt-lg">Même prompt, résultats différents</h2>
+          <p class="mt-md" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+            Vous posez la même question lundi et mardi. Voici ce que Claude vous répond.
+          </p>
+        </div>
+
+        <div class="chat-grid mt-xl">
+          <!-- Lundi -->
+          <div class="anim-slide-up">
+            <div class="chat-day-label monday">📅 Lundi</div>
+            <div class="window-mockup">
+              <div class="window-header">
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+                <span class="window-title">Claude — Conversation 1</span>
+              </div>
+              <div class="window-body" style="font-family: var(--font-body); font-size: 0.9rem; padding: var(--space-lg);">
+                <div class="chat-msg user">
+                  <span class="chat-avatar human">ME</span>
+                  <div class="chat-bubble">
+                    Rédige des conclusions au fond pour un dossier de dommage corporel. Victime : accident de la route, ITT 45 jours, consolidation acquise. Juridiction : TJ Aix-en-Provence.
+                  </div>
+                </div>
+                <div class="chat-msg ai" style="margin-top: var(--space-md);">
+                  <span class="chat-avatar ai">C</span>
+                  <div class="chat-bubble">
+                    <strong>CONCLUSIONS AU FOND</strong><br><br>
+                    Vu les articles <span class="chat-highlight-good">1240 et 1241 du Code civil</span><br>
+                    Vu <span class="chat-highlight-good">la nomenclature Dintilhac</span><br><br>
+                    Poste DFT : évalué selon barème...<br>
+                    Poste SE : <span class="chat-highlight-good">conformément à la jurisprudence de la 2e chambre civile de la Cour de cassation</span>...
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: var(--space-md); font-family: var(--font-ui); font-size: 0.8rem; color: var(--green); font-weight: 600;">✓ Résultat acceptable (après 20 min de setup)</p>
+          </div>
+
+          <!-- Mardi -->
+          <div class="anim-slide-up">
+            <div class="chat-day-label tuesday">📅 Mardi</div>
+            <div class="window-mockup" style="border-color: rgba(196, 92, 92, 0.3);">
+              <div class="window-header">
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+                <span class="window-dot"></span>
+                <span class="window-title">Claude — Conversation 2</span>
+              </div>
+              <div class="window-body" style="font-family: var(--font-body); font-size: 0.9rem; padding: var(--space-lg);">
+                <div class="chat-msg user">
+                  <span class="chat-avatar human">ME</span>
+                  <div class="chat-bubble">
+                    Rédige des conclusions au fond pour un dossier de dommage corporel. Victime : accident de la route, ITT 45 jours, consolidation acquise. Juridiction : TJ Aix-en-Provence.
+                  </div>
+                </div>
+                <div class="chat-msg ai" style="margin-top: var(--space-md);">
+                  <span class="chat-avatar ai">C</span>
+                  <div class="chat-bubble">
+                    <strong>Note juridique (analyse)</strong><br><br>
+                    En vertu du <span class="chat-highlight-bad">duty of care (Donoghue v Stevenson)</span><br>
+                    L'évaluation du <span class="chat-highlight-bad">general damages</span> pourrait...<br><br>
+                    Concernant les <span class="chat-highlight-bad">special damages</span>, il convient de noter...<br>
+                    <span class="chat-diff-label">⚠ Common Law au lieu de droit français</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: var(--space-md); font-family: var(--font-ui); font-size: 0.8rem; color: var(--red); font-weight: 600;">✗ Format, logique et références : tout a changé</p>
+          </div>
+        </div>
+
+        <div class="chat-verdict anim-fade-in">
+          <p>🔁 Même prompt. Même dossier. Deux résultats incompatibles.</p>
+          <p style="color: var(--text-secondary); font-weight: 400; margin-top: var(--space-sm); font-size: 0.85rem;">
+            Sans Skills, chaque conversation est un tirage au sort.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V3 — Pain Points Cards Grid
+       ============================================================ -->
+  <section id="v3" class="variant-section">
+    <span class="variant-label">V3 — Grille</span>
+    <div class="variant-inner">
+      <div class="container">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème</span>
+          <h2 class="problem-heading mt-lg">Vous reconnaissez ces situations ?</h2>
+          <p class="mt-md" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+            Cinq frustrations que vivent 95% des avocats qui utilisent l'IA au quotidien.
+          </p>
+        </div>
+
+        <div class="pain-grid stagger">
+          <!-- Card 1: Re-prompting -->
+          <div class="card anim-scale-in">
+            <span class="pain-icon">🔄</span>
+            <div class="pain-title">Tout réexpliquer, à chaque fois</div>
+            <p class="pain-desc">
+              Chaque nouvelle conversation repart de zéro. Votre méthodologie, vos standards, vos préférences : Claude ne retient rien. Vous passez 20 minutes en « setup » avant de commencer à travailler.
+            </p>
+          </div>
+
+          <!-- Card 2: Inconsistency -->
+          <div class="card anim-scale-in">
+            <span class="pain-icon">🎲</span>
+            <div class="pain-title">Des résultats aléatoires</div>
+            <p class="pain-desc">
+              Lundi, un travail correct. Mardi, pour la même demande, le format change, la logique est différente, les références juridiques ont disparu. Impossible de vous fier au résultat.
+            </p>
+          </div>
+
+          <!-- Card 3: Hallucinations -->
+          <div class="card anim-scale-in">
+            <span class="pain-icon">👻</span>
+            <div class="pain-title">Hallucinations et faux articles</div>
+            <p class="pain-desc">
+              Des arrêts inventés, des articles cités sans leur texte intégral, des références à des juridictions qui n'ont rien à voir avec votre dossier. Chaque output doit être vérifié ligne par ligne.
+            </p>
+          </div>
+
+          <!-- Card 4: Common Law -->
+          <div class="card anim-scale-in">
+            <span class="pain-icon">🇬🇧</span>
+            <div class="pain-title">Du Common Law à Aix-en-Provence</div>
+            <p class="pain-desc">
+              Vous plaidez en France. Claude vous cite du droit anglo-saxon. « Duty of care », « general damages »... Le modèle ne fait pas la différence entre les systèmes juridiques.
+            </p>
+          </div>
+
+          <!-- Card 5: High Stakes -->
+          <div class="card anim-scale-in">
+            <span class="pain-icon">⚖️</span>
+            <div class="pain-title">En dommage corporel, chaque erreur compte</div>
+            <p class="pain-desc">
+              Un mauvais poste Dintilhac, un barème mal appliqué, une expertise médicale mal analysée : ce ne sont pas de simples approximations. Ce sont des préjudices sous-évalués pour vos clients.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V4 — Big Quote + Context
+       ============================================================ -->
+  <section id="v4" class="variant-section">
+    <span class="variant-label">V4 — Citation</span>
+    <div class="variant-inner">
+      <div class="container-sm">
+        <div class="text-center anim-fade-in">
+          <span class="problem-tag">Le problème</span>
+        </div>
+
+        <div class="quote-block anim-slide-up">
+          <p class="big-quote">
+            Bienvenue dans le quotidien de 95% des avocats qui utilisent l'IA.
+          </p>
+          <p class="quote-source">
+            Constat partagé par des centaines d'avocats sur LinkedIn
+          </p>
+        </div>
+
+        <div class="divider mx-auto"></div>
+
+        <p class="text-center mt-xl anim-fade-in" style="max-width: 620px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+          L'IA promet un gain de temps considérable. En pratique, sans configuration adaptée, elle génère autant de frustration que de productivité.
+        </p>
+
+        <div class="context-grid stagger">
+          <div class="context-item anim-slide-up">
+            <div class="context-icon">⏱️</div>
+            <h4>Le temps perdu</h4>
+            <p>20 minutes de « prompting » par conversation avant d'obtenir quoi que ce soit d'utilisable. Multipliées par 10 conversations par jour.</p>
+          </div>
+
+          <div class="context-item anim-slide-up">
+            <div class="context-icon">🎰</div>
+            <h4>L'inconstance</h4>
+            <p>Un jour le résultat est bon, le lendemain il est inexploitable. Aucune garantie de qualité d'une session à l'autre.</p>
+          </div>
+
+          <div class="context-item anim-slide-up">
+            <div class="context-icon">🚨</div>
+            <h4>Le risque</h4>
+            <p>En dommage corporel et expertise médicale, une hallucination peut conduire à sous-évaluer le préjudice d'un client. Les erreurs ont un coût réel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V5 — Numbers / Statistics
+       ============================================================ -->
+  <section id="v5" class="variant-section">
+    <span class="variant-label">V5 — Chiffres</span>
+    <div class="variant-inner">
+      <div class="container">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème en chiffres</span>
+          <h2 class="problem-heading mt-lg">Ce que l'IA vous coûte (sans Skills)</h2>
+          <p class="mt-md" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+            Des chiffres concrets sur le quotidien des avocats qui utilisent l'IA sans configuration adaptée.
+          </p>
+        </div>
+
+        <div class="stats-grid stagger">
+          <!-- Stat 1 -->
+          <div class="stat-card anim-scale-in">
+            <div class="stat-number">
+              <span data-count-to="20" data-count-suffix=" min" data-count-duration="1500">0 min</span>
+            </div>
+            <div class="stat-title">Perdues par conversation</div>
+            <p class="stat-desc">
+              Le temps moyen passé à réexpliquer votre contexte, votre méthodologie et vos préférences avant chaque session de travail avec Claude.
+            </p>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="stat-card anim-scale-in">
+            <div class="stat-number">
+              <span data-count-to="95" data-count-suffix="%" data-count-duration="2000">0%</span>
+            </div>
+            <div class="stat-title">Des avocats concernés</div>
+            <p class="stat-desc">
+              La grande majorité des avocats utilisant l'IA n'ont aucun système pour garantir la cohérence et la fiabilité des résultats.
+            </p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="stat-card anim-scale-in">
+            <div class="stat-number">
+              <span data-count-to="0" data-count-duration="1000">0</span>
+            </div>
+            <div class="stat-title">Garde-fou contre les hallucinations</div>
+            <p class="stat-desc">
+              Sans Skills, aucun mécanisme n'empêche Claude de citer du Common Law, d'inventer des arrêts ou d'appliquer le mauvais barème.
+            </p>
+          </div>
+        </div>
+
+        <p class="stats-footnote anim-fade-in">
+          Ces constats sont partagés par des centaines d'avocats confrontés aux mêmes difficultés.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V6 — Checklist "Ça vous parle ?"
+       ============================================================ -->
+  <section id="v6" class="variant-section">
+    <span class="variant-label">V6 — Checklist</span>
+    <div class="variant-inner">
+      <div class="container-sm">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème</span>
+          <h2 class="problem-heading mt-lg">Ça vous parle ?</h2>
+          <p class="mt-md" style="max-width: 560px; margin-left: auto; margin-right: auto;">
+            Cochez mentalement les situations que vous avez déjà vécues.
+          </p>
+        </div>
+
+        <div class="checklist stagger" id="checklist-container">
+          <div class="check-item anim-slide-up" data-check-delay="400">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Vous passez plus de temps à « prompter » qu'à analyser le droit.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="700">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Chaque nouvelle conversation avec Claude repart de zéro : vous réexpliquez tout, à chaque fois.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="1000">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Claude vous cite du Common Law alors que vous plaidez à Aix-en-Provence.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="1300">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Vous avez déjà trouvé un arrêt cité par Claude qui n'existait tout simplement pas.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="1600">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Lundi, le résultat est bon. Mardi, pour la même demande, tout est différent.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="1900">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">Vous vérifiez chaque ligne produite par l'IA, ce qui annule tout gain de temps.</span>
+          </div>
+
+          <div class="check-item anim-slide-up" data-check-delay="2200">
+            <div class="check-box">
+              <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"></polyline></svg>
+            </div>
+            <span class="check-text">En dommage corporel, vous ne faites plus confiance à l'IA pour les postes de préjudice, car les erreurs sont trop risquées.</span>
+          </div>
+        </div>
+
+        <div class="check-count anim-fade-in">
+          <p>Si vous avez coché au moins 3 cases,<br><strong>ces Skills sont faits pour vous.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V7 — Split Before / After Preview
+       ============================================================ -->
+  <section id="v7" class="variant-section">
+    <span class="variant-label">V7 — Avant / Après</span>
+    <div class="variant-inner">
+      <div class="container">
+        <div class="text-center anim-slide-up">
+          <span class="problem-tag">Le problème (et un aperçu de la solution)</span>
+          <h2 class="problem-heading mt-lg">Deux réalités. Un seul outil.</h2>
+          <p class="mt-md" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+            D'un côté, le quotidien de la plupart des avocats avec l'IA. De l'autre, ce que les Skills rendent possible.
+          </p>
+        </div>
+
+        <div class="split-grid mt-2xl anim-scale-in">
+          <!-- Before -->
+          <div class="split-side split-before">
+            <span class="split-label">Aujourd'hui</span>
+            <div class="split-title">Votre quotidien sans Skills</div>
+            <ul class="split-list stagger">
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>20 minutes de « setup » à chaque conversation, pour réexpliquer votre méthode de travail</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>Des résultats incohérents d'un jour à l'autre, impossibles à exploiter en l'état</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>Des hallucinations (arrêts inventés, articles incomplets, mauvaises juridictions)</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>Du Common Law mélangé à du droit français sans aucun avertissement</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>Un doute permanent sur la fiabilité, surtout en dommage corporel</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✗</span>
+                <span>Plus de temps passé à vérifier qu'à produire</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- After -->
+          <div class="split-side split-after">
+            <span class="split-label">Avec les Skills</span>
+            <div class="split-title">Votre quotidien transformé</div>
+            <ul class="split-list stagger">
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>Claude connaît déjà votre méthodologie et vos standards dès l'ouverture</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>Un format identique et fiable, conversation après conversation</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>Des garde-fous intégrés contre les hallucinations et les faux articles</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>Le droit français (et uniquement le droit français) comme référence par défaut</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>La nomenclature Dintilhac et les barèmes appliqués automatiquement</span>
+              </li>
+              <li class="anim-slide-up">
+                <span class="icon">✓</span>
+                <span>Du temps libéré pour le travail qui compte : la stratégie et le conseil</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="split-cta anim-fade-in">
+          <p class="text-secondary font-ui" style="font-size: 0.95rem;">
+            La différence ne vient pas de Claude. Elle vient de la façon dont vous le configurez.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Page-specific JS
+       ============================================================ -->
+  <script src="../styles/base.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ---- V6: Checklist auto-check animation ---- */
+      const checkItems = document.querySelectorAll('#v6 .check-item');
+
+      if (checkItems.length) {
+        const checkObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const item = entry.target;
+              const delay = parseInt(item.dataset.checkDelay, 10) || 0;
+              setTimeout(() => {
+                item.classList.add('checked');
+              }, delay);
+              checkObserver.unobserve(item);
+            }
+          });
+        }, {
+          threshold: 0.3,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        checkItems.forEach(item => checkObserver.observe(item));
+      }
+
+      /* ---- V1: Animate frustration bars on scroll ---- */
+      const timelineDays = document.querySelectorAll('#v1 .timeline-day');
+
+      if (timelineDays.length) {
+        const barObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const bar = entry.target.querySelector('.frustration-bar');
+              if (bar) {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    bar.style.width = targetWidth;
+                  });
+                });
+              }
+              barObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.3
+        });
+
+        timelineDays.forEach(day => barObserver.observe(day));
+      }
+
+    });
+  </script>
+
+</body>
+</html>

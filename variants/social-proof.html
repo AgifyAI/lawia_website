@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Proof / Crédibilité : Variantes</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <style>
+    /* ============================================================
+       SOCIAL PROOF VARIANTS : Scoped Styles
+       ============================================================ */
+
+    /* ---- V1: Portrait + Credentials ---- */
+    #v1 .v1-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+    #v1 .v1-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: linear-gradient(145deg, var(--accent-light), rgba(106, 155, 204, 0.22));
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    #v1 .v1-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(106, 155, 204, 0.15), transparent 70%);
+    }
+    #v1 .v1-initials {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.6;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+    #v1 .v1-credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    #v1 .v1-bio {
+      margin-top: var(--space-xl);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    #v1 .v1-testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+    #v1 .v1-quote-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: var(--space-2xl);
+      position: relative;
+    }
+    #v1 .v1-quote-card::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.2;
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      line-height: 1;
+    }
+    #v1 .v1-quote-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+    #v1 .v1-quote-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+    #v1 .v1-quote-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      #v1 .v1-layout {
+        grid-template-columns: 1fr;
+      }
+      #v1 .v1-photo {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      #v1 .v1-testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V2: Credentials Grid + Quotes ---- */
+    #v2 .v2-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    #v2 .v2-stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-xl);
+      text-align: center;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v2 .v2-stat-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+    }
+    #v2 .v2-stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-md);
+    }
+    #v2 .v2-stat-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+    #v2 .v2-quotes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+    #v2 .v2-quote-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      position: relative;
+      border: 1px solid transparent;
+    }
+    #v2 .v2-quote-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: var(--space-2xl);
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    #v2 .v2-quote-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-top: var(--space-sm);
+    }
+    #v2 .v2-quote-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+    #v2 .v2-quote-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      #v2 .v2-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      #v2 .v2-quotes {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 540px) {
+      #v2 .v2-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V3: Timeline Journey ---- */
+    #v3 .v3-timeline {
+      position: relative;
+      padding-left: 40px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    #v3 .v3-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-light));
+      border-radius: 1px;
+    }
+    #v3 .v3-timeline-item {
+      position: relative;
+      padding-bottom: var(--space-2xl);
+    }
+    #v3 .v3-timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    #v3 .v3-timeline-dot {
+      position: absolute;
+      left: -33px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+      z-index: 2;
+    }
+    #v3 .v3-timeline-item.v3-highlight .v3-timeline-dot {
+      width: 16px;
+      height: 16px;
+      left: -35px;
+      top: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light), 0 0 0 6px rgba(106, 155, 204, 0.12);
+    }
+    #v3 .v3-timeline-date {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    #v3 .v3-timeline-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 4px;
+    }
+    #v3 .v3-timeline-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+    #v3 .v3-testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+    #v3 .v3-testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+    }
+    #v3 .v3-testi-card .v3-quote {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    #v3 .v3-testi-card .v3-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+    #v3 .v3-testi-card .v3-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      #v3 .v3-testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V4: Large Quote Focus ---- */
+    #v4 .v4-hero-quote {
+      position: relative;
+      padding: var(--space-3xl) 0;
+    }
+    #v4 .v4-hero-quote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 10rem;
+      color: var(--accent);
+      opacity: 0.1;
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      line-height: 1;
+    }
+    #v4 .v4-hero-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+    }
+    #v4 .v4-hero-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+    }
+    #v4 .v4-hero-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    #v4 .v4-hero-name {
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    #v4 .v4-hero-role {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+    #v4 .v4-bio-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl) var(--space-3xl);
+      margin-top: var(--space-3xl);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    #v4 .v4-bio-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+    #v4 .v4-bio-badges {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    #v4 .v4-second-quote {
+      margin-top: var(--space-3xl);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      border-left: 4px solid var(--accent);
+    }
+    #v4 .v4-second-text {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    #v4 .v4-second-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+
+    @media (max-width: 768px) {
+      #v4 .v4-bio-card {
+        grid-template-columns: 1fr;
+        padding: var(--space-xl);
+      }
+    }
+
+    /* ---- V5: Magazine / Article Style ---- */
+    #v5 .v5-article {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+    #v5 .v5-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--accent-light), rgba(106, 155, 204, 0.2));
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    #v5 .v5-photo-initials {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.5;
+      position: relative;
+      z-index: 1;
+    }
+    #v5 .v5-article-body h3 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: var(--space-sm);
+    }
+    #v5 .v5-subtitle {
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      color: var(--accent-dark);
+      font-weight: 500;
+      margin-bottom: var(--space-xl);
+    }
+    #v5 .v5-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-secondary);
+    }
+    #v5 .v5-text + .v5-text {
+      margin-top: var(--space-lg);
+    }
+    #v5 .v5-pullquote {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--accent-dark);
+      padding: var(--space-xl) 0;
+      margin: var(--space-xl) 0;
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      line-height: 1.5;
+    }
+    #v5 .v5-testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+    #v5 .v5-testi-box {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl) var(--space-2xl);
+    }
+    #v5 .v5-testi-box .v5-testi-label {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: var(--space-md);
+    }
+    #v5 .v5-testi-box .v5-testi-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    #v5 .v5-testi-box .v5-testi-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-md);
+    }
+    #v5 .v5-testi-box .v5-testi-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      #v5 .v5-article {
+        grid-template-columns: 1fr;
+      }
+      #v5 .v5-photo {
+        max-width: 240px;
+      }
+      #v5 .v5-testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V6: Trust Badges Wall ---- */
+    #v6 .v6-badges-wall {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    #v6 .v6-badge {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-md);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v6 .v6-badge:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    #v6 .v6-badge-shield {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    #v6 .v6-badge-shield.v6-blue {
+      background: var(--accent-light);
+    }
+    #v6 .v6-badge-shield.v6-green {
+      background: rgba(92, 160, 110, 0.12);
+    }
+    #v6 .v6-badge-shield.v6-amber {
+      background: rgba(218, 165, 32, 0.12);
+    }
+    #v6 .v6-badge-shield svg {
+      width: 28px;
+      height: 28px;
+    }
+    #v6 .v6-badge-title {
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    #v6 .v6-badge-desc {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+    }
+    #v6 .v6-testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+    #v6 .v6-testi-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      border: 1px solid transparent;
+    }
+    #v6 .v6-testi-card .v6-testi-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    #v6 .v6-testi-card .v6-testi-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+    #v6 .v6-testi-card .v6-testi-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      #v6 .v6-badges-wall {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      #v6 .v6-testimonials {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 540px) {
+      #v6 .v6-badges-wall {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- V7: Video Testimonial Layout ---- */
+    #v7 .v7-video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-xl);
+    }
+    #v7 .v7-video-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(106, 155, 204, 0.15), transparent 60%);
+    }
+    #v7 .v7-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all var(--dur-normal) var(--ease-out);
+      z-index: 2;
+    }
+    #v7 .v7-video-wrapper:hover .v7-play-btn {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+    #v7 .v7-play-btn svg {
+      width: 28px;
+      height: 28px;
+      color: var(--text);
+      margin-left: 4px;
+    }
+    #v7 .v7-video-label {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: var(--space-xl);
+      z-index: 2;
+    }
+    #v7 .v7-video-label-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    #v7 .v7-video-label-title {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 2px;
+    }
+    #v7 .v7-bio-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+      padding: var(--space-xl) 0;
+    }
+    #v7 .v7-bio-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    #v7 .v7-bio-info h4 {
+      margin-bottom: 4px;
+    }
+    #v7 .v7-bio-info p {
+      font-size: 0.95rem;
+    }
+    #v7 .v7-bio-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    #v7 .v7-testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+    #v7 .v7-testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v7 .v7-testi-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    #v7 .v7-testi-card .v7-testi-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    #v7 .v7-testi-card .v7-testi-author {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: var(--space-lg);
+    }
+    #v7 .v7-testi-card .v7-testi-role {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      #v7 .v7-bio-row {
+        flex-direction: column;
+        text-align: center;
+      }
+      #v7 .v7-bio-badges {
+        justify-content: center;
+      }
+      #v7 .v7-testimonials {
+        grid-template-columns: 1fr;
+      }
+      #v7 .v7-play-btn {
+        width: 60px;
+        height: 60px;
+      }
+      #v7 .v7-play-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation
+       ============================================================ -->
+  <nav class="variant-nav">
+    <span class="nav-title">Social Proof</span>
+    <a href="#v1" class="active">V1</a>
+    <a href="#v2">V2</a>
+    <a href="#v3">V3</a>
+    <a href="#v4">V4</a>
+    <a href="#v5">V5</a>
+    <a href="#v6">V6</a>
+    <a href="#v7">V7</a>
+  </nav>
+
+  <!-- ============================================================
+       V1 : Portrait + Credentials
+       ============================================================ -->
+  <section id="v1" class="variant-section" style="background: var(--bg);">
+    <span class="variant-label">V1 : Portrait + Credentials</span>
+    <div class="container section-padding">
+
+      <div class="v1-layout">
+        <!-- Photo placeholder -->
+        <div class="v1-photo anim-slide-right">
+          <span class="v1-initials">PH</span>
+        </div>
+
+        <!-- Bio content -->
+        <div class="anim-slide-up">
+          <span class="tag">Votre expert</span>
+          <h2 class="mt-lg">Me Patrice Humbert</h2>
+          <p style="font-family: var(--font-ui); font-size: 0.95rem; color: var(--accent-dark); margin-top: var(--space-xs);">
+            Avocat au Barreau d'Aix-en-Provence &bull; Cabinet LEXVOX, Salon-de-Provence
+          </p>
+
+          <div class="v1-credentials stagger">
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              20+ ans de barreau
+            </span>
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Spécialisation dommage corporel (CNB)
+            </span>
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Finaliste concours CNB Innovation &amp; IA
+            </span>
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              ~1 000 avocats formés à l'IA
+            </span>
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Master Droit de la Santé
+            </span>
+            <span class="badge anim-fade-in">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Diplômé de la Faculté de Médecine de Montpellier
+            </span>
+          </div>
+
+          <p class="v1-bio">
+            Prêté serment le 4 janvier 2006, Me Patrice Humbert exerce au barreau d'Aix-en-Provence depuis près de 20 ans. Titulaire d'un Master en Droit de la Santé, d'un DU Sciences Pénales et d'un DU Traumatisme Crânien (faculté de Médecine de Montpellier), il est certifié spécialiste en dommage corporel par le CNB. Cofondateur du réseau Provence Avocats, il est devenu un pionnier de l'IA appliquée au droit en France : il forme les avocats dans les écoles de formation, son site attire plus de 150 000 visites mensuelles, et il a été finaliste du concours officiel du CNB sur l'innovation et l'intelligence artificielle.
+          </p>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="v1-testimonials stagger">
+        <div class="v1-quote-card anim-slide-up">
+          <p class="v1-quote-text">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v1-quote-author">Me Patrice Humbert</p>
+          <p class="v1-quote-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v1-quote-card anim-slide-up">
+          <p class="v1-quote-text">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v1-quote-author">Me Cédrine Raybaud</p>
+          <p class="v1-quote-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V2 : Credentials Grid + Quotes
+       ============================================================ -->
+  <section id="v2" class="variant-section" style="background: var(--bg-alt);">
+    <span class="variant-label">V2 : Credentials Grid + Quotes</span>
+    <div class="container section-padding">
+
+      <div class="text-center anim-slide-up">
+        <span class="tag">Crédibilité &amp; expertise</span>
+        <h2 class="mt-lg">Conçu par un expert reconnu du barreau</h2>
+        <p class="mt-md" style="max-width: 620px; margin-left: auto; margin-right: auto;">
+          Me Patrice Humbert, avocat au barreau d'Aix-en-Provence et pionnier de l'IA juridique en France.
+        </p>
+      </div>
+
+      <div class="v2-stats-grid mt-3xl stagger">
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-value" data-count-to="20" data-count-suffix="+">20+</div>
+          <div class="stat-label">Années de barreau</div>
+        </div>
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-value" data-count-to="1000" data-count-prefix="~">~1 000</div>
+          <div class="stat-label">Avocats formés à l'IA</div>
+        </div>
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="stat-value" style="font-size: clamp(1.5rem, 3vw, 2rem);">Finaliste</div>
+          <div class="stat-label">Concours CNB Innovation &amp; IA</div>
+        </div>
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="stat-value" style="font-size: clamp(1.5rem, 3vw, 2rem);">CNB</div>
+          <div class="stat-label">Spécialisation dommage corporel</div>
+        </div>
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="stat-value" style="font-size: clamp(1.5rem, 3vw, 2rem);">Double</div>
+          <div class="stat-label">Formation Droit + Médecine</div>
+        </div>
+        <div class="v2-stat-card anim-scale-in">
+          <div class="v2-stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="stat-value" data-count-to="150" data-count-suffix="k+">150k+</div>
+          <div class="stat-label">Visites mensuelles sur son site</div>
+        </div>
+      </div>
+
+      <!-- Quotes -->
+      <div class="v2-quotes stagger">
+        <div class="v2-quote-card anim-slide-up">
+          <p class="v2-quote-text">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v2-quote-author">Me Patrice Humbert</p>
+          <p class="v2-quote-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v2-quote-card anim-slide-up">
+          <p class="v2-quote-text">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v2-quote-author">Me Cédrine Raybaud</p>
+          <p class="v2-quote-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V3 : Timeline Journey
+       ============================================================ -->
+  <section id="v3" class="variant-section" style="background: var(--bg);">
+    <span class="variant-label">V3 : Timeline Journey</span>
+    <div class="container section-padding">
+
+      <div class="text-center anim-slide-up">
+        <span class="tag">Un parcours d'exception</span>
+        <h2 class="mt-lg">Le parcours de Me Patrice Humbert</h2>
+        <p class="mt-md" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+          Du serment d'avocat à la création du pack Skills : une trajectoire unique au croisement du droit, de la médecine et de l'intelligence artificielle.
+        </p>
+      </div>
+
+      <div class="v3-timeline mt-3xl stagger">
+        <div class="v3-timeline-item anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">2006</div>
+          <div class="v3-timeline-title">Prestation de serment</div>
+          <div class="v3-timeline-desc">4 janvier 2006, barreau d'Aix-en-Provence. Début d'une carrière qui durera plus de 20 ans au sein du Cabinet LEXVOX, Salon-de-Provence.</div>
+        </div>
+        <div class="v3-timeline-item anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Formation</div>
+          <div class="v3-timeline-title">Double expertise : Droit et Médecine</div>
+          <div class="v3-timeline-desc">Master en Droit de la Santé, DU Sciences Pénales, diplôme de la Faculté de Médecine de Montpellier, DU Traumatisme Crânien.</div>
+        </div>
+        <div class="v3-timeline-item anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Spécialisation</div>
+          <div class="v3-timeline-title">Certificat de spécialisation dommage corporel (CNB)</div>
+          <div class="v3-timeline-desc">Reconnaissance officielle par le Conseil National des Barreaux. Cofondation du réseau Provence Avocats.</div>
+        </div>
+        <div class="v3-timeline-item v3-highlight anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Pionnier IA</div>
+          <div class="v3-timeline-title">Pionnier de l'IA appliquée au droit en France</div>
+          <div class="v3-timeline-desc">150 000+ visites mensuelles sur son site. Intervient dans les écoles d'avocats pour former la profession aux outils d'IA générative.</div>
+        </div>
+        <div class="v3-timeline-item anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Formation</div>
+          <div class="v3-timeline-title">Près de 1 000 avocats formés à l'IA</div>
+          <div class="v3-timeline-desc">Des formations concrètes et pratiques dispensées dans toute la France pour aider les avocats à maîtriser l'IA générative.</div>
+        </div>
+        <div class="v3-timeline-item v3-highlight anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Distinction</div>
+          <div class="v3-timeline-title">Finaliste du concours CNB sur l'innovation et l'IA</div>
+          <div class="v3-timeline-desc">Reconnaissance officielle de son approche novatrice au concours organisé par le Conseil National des Barreaux.</div>
+        </div>
+        <div class="v3-timeline-item v3-highlight anim-slide-up">
+          <div class="v3-timeline-dot"></div>
+          <div class="v3-timeline-date">Aujourd'hui</div>
+          <div class="v3-timeline-title">Création du Pack Skills juridiques Claude</div>
+          <div class="v3-timeline-desc">L'aboutissement de 20 ans d'expertise juridique et de pratique avancée de l'IA, concentrés dans un outil accessible à tous les avocats.</div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="v3-testimonials stagger">
+        <div class="v3-testi-card anim-slide-up">
+          <p class="v3-quote">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v3-author">Me Patrice Humbert</p>
+          <p class="v3-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v3-testi-card anim-slide-up">
+          <p class="v3-quote">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v3-author">Me Cédrine Raybaud</p>
+          <p class="v3-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V4 : Large Quote Focus
+       ============================================================ -->
+  <section id="v4" class="variant-section" style="background: var(--bg-alt);">
+    <span class="variant-label">V4 : Large Quote Focus</span>
+    <div class="container-sm section-padding">
+
+      <div class="text-center anim-fade-in">
+        <span class="tag">Ils témoignent</span>
+      </div>
+
+      <!-- Hero quote -->
+      <div class="v4-hero-quote anim-slide-up">
+        <p class="v4-hero-text">
+          « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+        </p>
+        <div class="v4-hero-author">
+          <div class="v4-hero-avatar">PH</div>
+          <div>
+            <p class="v4-hero-name">Me Patrice Humbert</p>
+            <p class="v4-hero-role">Cabinet LEXVOX, Salon-de-Provence</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio card -->
+      <div class="v4-bio-card anim-slide-up">
+        <div>
+          <p class="v4-bio-text">
+            Prêté serment le 4 janvier 2006, Me Humbert exerce au barreau d'Aix-en-Provence depuis près de 20 ans. Titulaire d'un Master en Droit de la Santé et diplômé de la Faculté de Médecine de Montpellier, il est certifié spécialiste en dommage corporel par le CNB. Pionnier de l'IA juridique en France, il a formé près de 1 000 avocats à l'IA générative et a été finaliste du concours officiel du CNB sur l'innovation et l'intelligence artificielle. Son site attire plus de 150 000 visites mensuelles.
+          </p>
+        </div>
+        <div class="v4-bio-badges">
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            20+ ans
+          </span>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Finaliste CNB IA
+          </span>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            ~1 000 formés
+          </span>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Spécialiste CNB
+          </span>
+        </div>
+      </div>
+
+      <!-- Second testimonial -->
+      <div class="v4-second-quote anim-slide-up">
+        <p class="v4-second-text">
+          « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+        </p>
+        <p class="v4-second-author">Me Cédrine Raybaud, Avocate</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V5 : Magazine / Article Style
+       ============================================================ -->
+  <section id="v5" class="variant-section" style="background: var(--bg);">
+    <span class="variant-label">V5 : Magazine / Article Style</span>
+    <div class="container section-padding">
+
+      <div class="v5-article">
+        <!-- Photo side -->
+        <div class="anim-slide-right">
+          <div class="v5-photo">
+            <span class="v5-photo-initials">PH</span>
+          </div>
+          <div style="margin-top: var(--space-md); text-align: center;">
+            <span class="tag">Portrait</span>
+          </div>
+        </div>
+
+        <!-- Article body -->
+        <div class="v5-article-body anim-slide-up">
+          <h3>Me Patrice Humbert : l'avocat qui transforme la pratique juridique par l'IA</h3>
+          <p class="v5-subtitle">Cabinet LEXVOX &bull; Barreau d'Aix-en-Provence &bull; Depuis 2006</p>
+
+          <div class="divider"></div>
+
+          <p class="v5-text">
+            Prêté serment le 4 janvier 2006 au barreau d'Aix-en-Provence, Me Patrice Humbert n'est pas un avocat ordinaire. Titulaire d'un Master en Droit de la Santé, d'un DU en Sciences Pénales, et diplômé de la Faculté de Médecine de Montpellier (DU Traumatisme Crânien), il incarne une double expertise unique au croisement du droit et de la médecine.
+          </p>
+
+          <div class="v5-pullquote">
+            « Pionnier de l'IA appliquée au droit en France, il a formé près de 1 000 avocats à l'IA générative et a été finaliste du concours officiel du CNB sur l'innovation. »
+          </div>
+
+          <p class="v5-text">
+            Certifié spécialiste en dommage corporel par le Conseil National des Barreaux, cofondateur du réseau Provence Avocats, Me Humbert intervient régulièrement dans les écoles d'avocats. Son site personnel attire plus de 150 000 visites mensuelles, témoignant de l'ampleur de son rayonnement dans la profession. Avec le Pack Skills juridiques, il rend accessible à tous les avocats le fruit de ses 20 années d'expertise et de son exploration avancée de l'intelligence artificielle.
+          </p>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="v5-testimonials stagger">
+        <div class="v5-testi-box anim-slide-up">
+          <p class="v5-testi-label">Témoignage</p>
+          <p class="v5-testi-text">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v5-testi-author">Me Patrice Humbert</p>
+          <p class="v5-testi-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v5-testi-box anim-slide-up">
+          <p class="v5-testi-label">Témoignage</p>
+          <p class="v5-testi-text">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v5-testi-author">Me Cédrine Raybaud</p>
+          <p class="v5-testi-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V6 : Trust Badges Wall
+       ============================================================ -->
+  <section id="v6" class="variant-section" style="background: var(--bg-alt);">
+    <span class="variant-label">V6 : Trust Badges Wall</span>
+    <div class="container section-padding">
+
+      <div class="text-center anim-slide-up">
+        <span class="tag">Signaux de confiance</span>
+        <h2 class="mt-lg">Pourquoi faire confiance à Me Humbert ?</h2>
+        <p class="mt-md" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+          Chaque badge représente une compétence vérifiable et une reconnaissance officielle de la profession.
+        </p>
+      </div>
+
+      <div class="v6-badges-wall mt-3xl stagger">
+        <!-- Badge 1: CNB -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#6A9BCC" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="v6-badge-title">Spécialisation CNB</div>
+          <div class="v6-badge-desc">Certificat en dommage corporel délivré par le Conseil National des Barreaux</div>
+        </div>
+        <!-- Badge 2: 20 ans -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#6A9BCC" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="v6-badge-title">20+ ans de barreau</div>
+          <div class="v6-badge-desc">Serment prêté le 4 janvier 2006, barreau d'Aix-en-Provence</div>
+        </div>
+        <!-- Badge 3: 1000 avocats -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#5CA06E" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="v6-badge-title">~1 000 avocats formés</div>
+          <div class="v6-badge-desc">Formations à l'IA générative dans les écoles d'avocats et cabinets</div>
+        </div>
+        <!-- Badge 4: Finaliste -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#DAA520" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="v6-badge-title">Finaliste Innovation &amp; IA</div>
+          <div class="v6-badge-desc">Concours officiel du Conseil National des Barreaux</div>
+        </div>
+        <!-- Badge 5: Droit + Médecine -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#6A9BCC" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
+          </div>
+          <div class="v6-badge-title">Médecine + Droit</div>
+          <div class="v6-badge-desc">Diplômé de la Faculté de Médecine de Montpellier (DU Traumatisme Crânien)</div>
+        </div>
+        <!-- Badge 6: Provence Avocats -->
+        <div class="v6-badge anim-scale-in">
+          <div class="v6-badge-shield v6-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#5CA06E" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="v6-badge-title">Réseau Provence Avocats</div>
+          <div class="v6-badge-desc">Cofondateur du réseau, 150 000+ visites mensuelles sur son site</div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="v6-testimonials stagger">
+        <div class="v6-testi-card anim-slide-up">
+          <p class="v6-testi-text">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v6-testi-author">Me Patrice Humbert</p>
+          <p class="v6-testi-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v6-testi-card anim-slide-up">
+          <p class="v6-testi-text">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v6-testi-author">Me Cédrine Raybaud</p>
+          <p class="v6-testi-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       V7 : Video Testimonial Layout
+       ============================================================ -->
+  <section id="v7" class="variant-section" style="background: var(--bg);">
+    <span class="variant-label">V7 : Video Testimonial Layout</span>
+    <div class="container section-padding">
+
+      <div class="text-center anim-slide-up">
+        <span class="tag">Témoignage vidéo</span>
+        <h2 class="mt-lg">Écoutez Me Humbert parler de ses Skills</h2>
+      </div>
+
+      <!-- Video placeholder -->
+      <div class="v7-video-wrapper mt-2xl anim-scale-in">
+        <div class="v7-play-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="v7-video-label">
+          <p class="v7-video-label-name">Me Patrice Humbert</p>
+          <p class="v7-video-label-title">Avocat au Barreau d'Aix-en-Provence &bull; Cabinet LEXVOX</p>
+        </div>
+      </div>
+
+      <!-- Bio row -->
+      <div class="v7-bio-row anim-slide-up">
+        <div class="v7-bio-avatar">PH</div>
+        <div class="v7-bio-info">
+          <h4>Me Patrice Humbert</h4>
+          <p class="text-secondary">
+            Avocat depuis 2006, spécialiste en dommage corporel (CNB), diplômé en Droit de la Santé et en Médecine. Pionnier de l'IA juridique en France, il a formé près de 1 000 avocats à l'IA générative et a été finaliste du concours CNB sur l'innovation et l'IA.
+          </p>
+          <div class="v7-bio-badges">
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              20+ ans
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Finaliste CNB IA
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              ~1 000 formés
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Spécialiste CNB
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="v7-testimonials stagger">
+        <div class="v7-testi-card anim-slide-up">
+          <p class="v7-testi-text">
+            « Ces Skills ont transformé ma pratique quotidienne. Ce qui me prenait des heures de prompting se fait désormais en quelques minutes, avec une constance que je n'aurais jamais obtenue autrement. »
+          </p>
+          <p class="v7-testi-author">Me Patrice Humbert</p>
+          <p class="v7-testi-role">Cabinet LEXVOX, Salon-de-Provence</p>
+        </div>
+        <div class="v7-testi-card anim-slide-up">
+          <p class="v7-testi-text">
+            « Les Skills créés pour notre cabinet changent la donne. La qualité et la constance des résultats sont incomparables avec ce que nous obtenions avant. »
+          </p>
+          <p class="v7-testi-author">Me Cédrine Raybaud</p>
+          <p class="v7-testi-role">Avocate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="../styles/base.js"></script>
+</body>
+</html>

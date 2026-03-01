@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qu'est-ce qu'un Skill ? (7 variantes)</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <style>
+    /* ============================================================
+       V1 : Transformation Visual (avant / apres)
+       ============================================================ */
+    #v1 { background: var(--bg); }
+
+    #v1 .v1-split {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: var(--space-lg);
+      align-items: stretch;
+      margin-top: var(--space-3xl);
+    }
+
+    #v1 .v1-panel {
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl) var(--space-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #v1 .v1-panel-bad {
+      background: var(--white);
+      border: 2px solid var(--red);
+      box-shadow: 0 4px 20px rgba(196, 92, 92, 0.1);
+    }
+
+    #v1 .v1-panel-good {
+      background: var(--white);
+      border: 2px solid var(--green);
+      box-shadow: 0 4px 20px rgba(92, 160, 110, 0.1);
+    }
+
+    #v1 .v1-panel-label {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: var(--space-lg);
+    }
+
+    #v1 .v1-panel-bad .v1-panel-label {
+      background: rgba(196, 92, 92, 0.1);
+      color: var(--red);
+    }
+
+    #v1 .v1-panel-good .v1-panel-label {
+      background: rgba(92, 160, 110, 0.1);
+      color: var(--green);
+    }
+
+    #v1 .v1-panel h4 {
+      margin-bottom: var(--space-lg);
+      font-size: 1.15rem;
+    }
+
+    #v1 .v1-line {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+      color: var(--text-secondary);
+    }
+
+    #v1 .v1-line-icon {
+      flex-shrink: 0;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    #v1 .v1-panel-bad .v1-line-icon { color: var(--red); }
+    #v1 .v1-panel-good .v1-line-icon { color: var(--green); }
+
+    #v1 .v1-vs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #v1 .v1-vs-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-ui);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      box-shadow: var(--shadow-accent);
+    }
+
+    #v1 .v1-mockup-bar {
+      height: 6px;
+      border-radius: 3px;
+      margin-bottom: var(--space-sm);
+    }
+
+    #v1 .v1-panel-bad .v1-mockup-bar {
+      background: rgba(196, 92, 92, 0.15);
+    }
+
+    #v1 .v1-panel-good .v1-mockup-bar {
+      background: rgba(92, 160, 110, 0.15);
+    }
+
+    #v1 .v1-mockup-bar:nth-child(odd) { width: 100%; }
+    #v1 .v1-mockup-bar:nth-child(even) { width: 70%; }
+
+    #v1 .v1-bottom-line {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      #v1 .v1-split {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      #v1 .v1-vs {
+        padding: var(--space-sm) 0;
+      }
+    }
+
+    /* ============================================================
+       V2 : Expertise Transfer
+       ============================================================ */
+    #v2 { background: var(--bg-alt); }
+
+    #v2 .v2-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-3xl);
+    }
+
+    #v2 .v2-stat-card {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-lg);
+      border: 1px solid var(--border);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v2 .v2-stat-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--accent-light);
+    }
+
+    #v2 .v2-stat-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    #v2 .v2-flow-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: var(--space-3xl) auto;
+      max-width: 600px;
+      gap: var(--space-xl);
+    }
+
+    #v2 .v2-flow-box {
+      background: var(--white);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    #v2 .v2-flow-box.v2-flow-result {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent-dark);
+    }
+
+    #v2 .v2-flow-connector {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    #v2 .v2-flow-connector svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--accent);
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    #v2 .v2-tagline {
+      text-align: center;
+      max-width: 640px;
+      margin: var(--space-xl) auto 0;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      #v2 .v2-stats { grid-template-columns: 1fr; }
+      #v2 .v2-flow-arrow { flex-direction: column; }
+      #v2 .v2-flow-connector svg { transform: rotate(90deg); }
+    }
+
+    /* ============================================================
+       V3 : Guard-Rails / Safety
+       ============================================================ */
+    #v3 { background: var(--bg); }
+
+    #v3 .v3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-3xl);
+    }
+
+    #v3 .v3-grid > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: 400px;
+      justify-self: center;
+    }
+
+    #v3 .v3-shield-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: var(--space-2xl);
+      text-align: center;
+      transition: all var(--dur-normal) var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #v3 .v3-shield-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--green);
+      opacity: 0;
+      transition: opacity var(--dur-normal);
+    }
+
+    #v3 .v3-shield-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: rgba(92, 160, 110, 0.3);
+    }
+
+    #v3 .v3-shield-card:hover::before {
+      opacity: 1;
+    }
+
+    #v3 .v3-shield-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: var(--space-lg);
+      background: rgba(92, 160, 110, 0.1);
+    }
+
+    #v3 .v3-shield-card h4 {
+      margin-bottom: var(--space-sm);
+      font-size: 1.05rem;
+    }
+
+    #v3 .v3-shield-card p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    #v3 .v3-certified {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+      padding: var(--space-lg) var(--space-xl);
+      background: rgba(92, 160, 110, 0.06);
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #v3 .v3-certified-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    #v3 .v3-certified p {
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      #v3 .v3-grid { grid-template-columns: 1fr; }
+      #v3 .v3-grid > :last-child:nth-child(odd) { max-width: 100%; }
+    }
+
+    /* ============================================================
+       V4 : Before/After Mockup
+       ============================================================ */
+    #v4 { background: var(--bg-alt); }
+
+    #v4 .v4-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      margin-top: var(--space-3xl);
+      align-items: start;
+    }
+
+    #v4 .v4-mockup-label {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    #v4 .v4-label-bad { color: var(--red); }
+    #v4 .v4-label-good { color: var(--green); }
+
+    #v4 .v4-bad .window-mockup {
+      border-color: rgba(196, 92, 92, 0.3);
+    }
+
+    #v4 .v4-good .window-mockup {
+      border-color: rgba(92, 160, 110, 0.3);
+    }
+
+    #v4 .window-body {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      min-height: 320px;
+      padding: var(--space-lg) var(--space-xl);
+    }
+
+    #v4 .v4-bad .window-body {
+      color: var(--text-tertiary);
+    }
+
+    #v4 .v4-good .window-body {
+      color: var(--text);
+    }
+
+    #v4 .v4-line-error {
+      color: var(--red);
+      font-weight: 600;
+      font-size: 0.75rem;
+      display: inline-block;
+      background: rgba(196, 92, 92, 0.08);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: var(--space-xs);
+    }
+
+    #v4 .v4-line-ok {
+      color: var(--green);
+      font-weight: 600;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-left: var(--space-xs);
+    }
+
+    #v4 .v4-verdict {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 900px) {
+      #v4 .v4-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       V5 : Benefits List (The Promise)
+       ============================================================ */
+    #v5 { background: var(--bg); }
+
+    #v5 .v5-list {
+      max-width: 720px;
+      margin: var(--space-3xl) auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    #v5 .v5-benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-xl);
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      border: 1px solid var(--border);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v5 .v5-benefit:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateX(6px);
+      border-color: var(--accent-light);
+    }
+
+    #v5 .v5-benefit-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-top: 2px;
+    }
+
+    #v5 .v5-benefit-content h4 {
+      font-size: 1.05rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    #v5 .v5-benefit-content p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* ============================================================
+       V6 : Analogy Section
+       ============================================================ */
+    #v6 { background: var(--bg-alt); }
+
+    #v6 .v6-quote {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    #v6 .v6-quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    #v6 .v6-quote-reveal {
+      margin-top: var(--space-2xl);
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    #v6 .v6-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-3xl);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #v6 .v6-pillar {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-xl);
+      border: 1px solid var(--border);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v6 .v6-pillar:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--accent-light);
+    }
+
+    #v6 .v6-pillar-icon {
+      font-size: 2.2rem;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    #v6 .v6-pillar h4 {
+      margin-bottom: var(--space-sm);
+    }
+
+    #v6 .v6-pillar p {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      #v6 .v6-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       V7 : How It Works (buyer perspective)
+       ============================================================ */
+    #v7 { background: var(--bg); }
+
+    #v7 .v7-steps {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: var(--space-lg);
+      align-items: start;
+      margin-top: var(--space-3xl);
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #v7 .v7-step {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl) var(--space-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+
+    #v7 .v7-step:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--accent-light);
+    }
+
+    #v7 .v7-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    #v7 .v7-step-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+      display: block;
+    }
+
+    #v7 .v7-step h4 {
+      margin-bottom: var(--space-sm);
+      font-size: 1.05rem;
+    }
+
+    #v7 .v7-step p {
+      font-size: 0.95rem;
+    }
+
+    #v7 .v7-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: var(--space-3xl);
+      flex-shrink: 0;
+    }
+
+    #v7 .v7-arrow svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    #v7 .v7-reassurance {
+      text-align: center;
+      margin-top: var(--space-2xl);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #v7 .v7-reassurance p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2xl);
+    }
+
+    @media (max-width: 768px) {
+      #v7 .v7-steps {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      #v7 .v7-arrow {
+        padding-top: 0;
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     Navigation
+     ============================================================ -->
+<nav class="variant-nav">
+  <span class="nav-title">Skill Explainer</span>
+  <a href="#v1">V1 Transformation</a>
+  <a href="#v2">V2 Expertise</a>
+  <a href="#v3">V3 Garde-fous</a>
+  <a href="#v4">V4 Avant/Apr&#232;s</a>
+  <a href="#v5">V5 Promesse</a>
+  <a href="#v6">V6 Analogie</a>
+  <a href="#v7">V7 Parcours</a>
+</nav>
+
+
+<!-- ============================================================
+     V1 : Transformation Visual
+     ============================================================ -->
+<section id="v1" class="variant-section">
+  <span class="variant-label">V1 : Transformation visuelle</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">La solution</span>
+      <h2 class="mt-lg anim-slide-up">M&#234;me IA. R&#233;sultats compl&#232;tement diff&#233;rents.</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 620px; margin-left: auto; margin-right: auto;">
+        La diff&#233;rence entre un Claude g&#233;n&#233;rique et un Claude &#233;quip&#233; des Skills de Me&nbsp;Humbert ?
+        20 ans d'expertise juridique, activ&#233;s automatiquement &#224; chaque conversation.
+      </p>
+    </div>
+
+    <div class="v1-split">
+
+      <!-- Panel: sans Skills -->
+      <div class="v1-panel v1-panel-bad anim-slide-right">
+        <span class="v1-panel-label">Claude sans Skills</span>
+        <h4>R&#233;sultats al&#233;atoires et risqu&#233;s</h4>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10005;</span>
+          <span>R&#233;f&#233;rences au Common Law dans les analyses</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10005;</span>
+          <span>Articles de loi cit&#233;s partiellement ou invent&#233;s</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10005;</span>
+          <span>Aucune structure m&#233;thodologique coh&#233;rente</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10005;</span>
+          <span>Re-prompting n&#233;cessaire &#224; chaque session</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10005;</span>
+          <span>Hallucinations fr&#233;quentes sur la jurisprudence</span>
+        </div>
+        <div style="margin-top: var(--space-lg);">
+          <div class="v1-mockup-bar" style="width: 90%; background: rgba(196,92,92,0.18);"></div>
+          <div class="v1-mockup-bar" style="width: 55%; background: rgba(196,92,92,0.12);"></div>
+          <div class="v1-mockup-bar" style="width: 75%; background: rgba(196,92,92,0.18);"></div>
+          <div class="v1-mockup-bar" style="width: 40%; background: rgba(196,92,92,0.12);"></div>
+        </div>
+      </div>
+
+      <!-- VS -->
+      <div class="v1-vs anim-scale-in">
+        <div class="v1-vs-circle">VS</div>
+      </div>
+
+      <!-- Panel: avec Skills -->
+      <div class="v1-panel v1-panel-good anim-slide-left">
+        <span class="v1-panel-label">Claude avec les Skills</span>
+        <h4>R&#233;sultats pr&#233;cis et s&#233;curis&#233;s</h4>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10003;</span>
+          <span>Exclusivement du droit fran&#231;ais, conforme &#224; votre pratique</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10003;</span>
+          <span>Articles cit&#233;s in extenso avec les bons fondements</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10003;</span>
+          <span>M&#233;thodologie structur&#233;e (visas, moyens, demandes)</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10003;</span>
+          <span>Z&#233;ro configuration : vous ouvrez Claude et travaillez</span>
+        </div>
+        <div class="v1-line">
+          <span class="v1-line-icon">&#10003;</span>
+          <span>Garde-fous int&#233;gr&#233;s contre les hallucinations</span>
+        </div>
+        <div style="margin-top: var(--space-lg);">
+          <div class="v1-mockup-bar" style="width: 100%; background: rgba(92,160,110,0.18);"></div>
+          <div class="v1-mockup-bar" style="width: 80%; background: rgba(92,160,110,0.12);"></div>
+          <div class="v1-mockup-bar" style="width: 95%; background: rgba(92,160,110,0.18);"></div>
+          <div class="v1-mockup-bar" style="width: 65%; background: rgba(92,160,110,0.12);"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="v1-bottom-line anim-slide-up mt-2xl">
+      La m&#234;me IA. La m&#234;me question. Mais avec 20 ans d'expertise en plus.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V2 : Expertise Transfer
+     ============================================================ -->
+<section id="v2" class="variant-section">
+  <span class="variant-label">V2 : Transfert d'expertise</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">L'expertise de Me&nbsp;Humbert</span>
+      <h2 class="mt-lg anim-slide-up">20 ans d'expertise, pr&#234;ts &#224; l'emploi</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 640px; margin-left: auto; margin-right: auto;">
+        Ces Skills ne sont pas un produit g&#233;n&#233;rique. Ils sont le fruit de deux d&#233;cennies
+        de pratique en dommage corporel, condens&#233;es en une m&#233;thodologie que Claude applique
+        automatiquement pour vous.
+      </p>
+    </div>
+
+    <div class="v2-stats stagger">
+      <div class="v2-stat-card anim-slide-up">
+        <span class="v2-stat-icon">&#9878;&#65039;</span>
+        <div class="stat-value" data-count-to="20" data-count-suffix="+">0</div>
+        <div class="stat-label">ans de pratique en dommage corporel</div>
+      </div>
+      <div class="v2-stat-card anim-slide-up">
+        <span class="v2-stat-icon">&#128218;</span>
+        <div class="stat-value">100+</div>
+        <div class="stat-label">dossiers r&#233;els utilis&#233;s pour affiner les Skills</div>
+      </div>
+      <div class="v2-stat-card anim-slide-up">
+        <span class="v2-stat-icon">&#128736;&#65039;</span>
+        <div class="stat-value">6+</div>
+        <div class="stat-label">mois de d&#233;veloppement et de tests</div>
+      </div>
+    </div>
+
+    <div class="v2-flow-arrow anim-slide-up">
+      <div class="v2-flow-box">Son expertise</div>
+      <div class="v2-flow-connector">
+        <svg viewBox="0 0 48 48"><polyline points="8,24 40,24" /><polyline points="32,16 40,24 32,32" /></svg>
+      </div>
+      <div class="v2-flow-box v2-flow-result">Vos r&#233;sultats</div>
+    </div>
+
+    <p class="v2-tagline anim-fade-in">
+      Vous recevez le fruit de tout ce travail. Installez, utilisez, b&#233;n&#233;ficiez.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V3 : Guard-Rails / Safety
+     ============================================================ -->
+<section id="v3" class="variant-section">
+  <span class="variant-label">V3 : Garde-fous</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">S&#233;curit&#233; int&#233;gr&#233;e</span>
+      <h2 class="mt-lg anim-slide-up">Des garde-fous int&#233;gr&#233;s par un expert</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 620px; margin-left: auto; margin-right: auto;">
+        Chaque Skill contient des protections test&#233;es sur de vrais dossiers en dommage corporel
+        et expertise m&#233;dicale. Les erreurs les plus courantes de l'IA sont anticip&#233;es et bloqu&#233;es.
+      </p>
+    </div>
+
+    <div class="v3-grid stagger">
+
+      <div class="v3-shield-card anim-slide-up">
+        <span class="v3-shield-icon">&#128737;&#65039;</span>
+        <h4>Pas d'hallucinations</h4>
+        <p>Les Skills imposent &#224; Claude de ne citer que des sources v&#233;rifiables. Fini les articles de loi invent&#233;s et les jurisprudences fantaisistes.</p>
+      </div>
+
+      <div class="v3-shield-card anim-slide-up">
+        <span class="v3-shield-icon">&#127467;&#127479;</span>
+        <h4>Pas de Common Law</h4>
+        <p>Claude reste strictement dans le cadre du droit fran&#231;ais. Les r&#233;flexes anglo-saxons de l'IA sont neutralis&#233;s par des r&#232;gles explicites.</p>
+      </div>
+
+      <div class="v3-shield-card anim-slide-up">
+        <span class="v3-shield-icon">&#9989;</span>
+        <h4>Articles cit&#233;s in extenso</h4>
+        <p>Chaque r&#233;f&#233;rence l&#233;gale est reproduite int&#233;gralement, avec les bons fondements textuels. Pas de r&#233;sum&#233;s approximatifs.</p>
+      </div>
+
+      <div class="v3-shield-card anim-slide-up">
+        <span class="v3-shield-icon">&#128203;</span>
+        <h4>M&#233;thodologie v&#233;rifi&#233;e</h4>
+        <p>La structure de chaque r&#233;ponse suit une m&#233;thodologie &#233;prouv&#233;e : visas, moyens principaux et subsidiaires, demandes chiffr&#233;es.</p>
+      </div>
+
+      <div class="v3-shield-card anim-slide-up">
+        <span class="v3-shield-icon">&#128188;</span>
+        <h4>Test&#233; sur de vrais dossiers</h4>
+        <p>Ces Skills ont &#233;t&#233; affin&#233;s sur des cas r&#233;els &#224; forts enjeux (dommage corporel, expertise m&#233;dicale). Ce n'est pas de la th&#233;orie.</p>
+      </div>
+
+    </div>
+
+    <div class="v3-certified anim-fade-in mt-2xl">
+      <span class="v3-certified-icon">&#127942;</span>
+      <p>Con&#231;us par Me&nbsp;Patrice Humbert, avocat sp&#233;cialiste certifi&#233; par le CNB, 20+ ans d'exp&#233;rience</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V4 : Before/After Results Mockup
+     ============================================================ -->
+<section id="v4" class="variant-section">
+  <span class="variant-label">V4 : Avant / Apr&#232;s</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">Comparaison concr&#232;te</span>
+      <h2 class="mt-lg anim-slide-up">Le m&#234;me cas. Deux r&#233;ponses.</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+        Voyez la diff&#233;rence entre un Claude g&#233;n&#233;rique et un Claude &#233;quip&#233;
+        de l'expertise de Me&nbsp;Humbert.
+      </p>
+    </div>
+
+    <div class="v4-comparison">
+
+      <!-- BAD result -->
+      <div class="v4-bad anim-slide-right">
+        <p class="v4-mockup-label v4-label-bad">&#10005; R&#233;sultat sans Skill</p>
+        <div class="window-mockup">
+          <div class="window-header">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Claude (conversation standard)</span>
+          </div>
+          <div class="window-body">
+            <strong>Analyse du pr&#233;judice corporel</strong><br><br>
+            Le client pourrait r&#233;clamer des dommages et int&#233;r&#234;ts
+            en vertu des principes g&#233;n&#233;raux de responsabilit&#233;.
+            <span class="v4-line-error">&#9888; Aucun fondement textuel</span><br><br>
+            Selon la doctrine du &laquo;&nbsp;duty of care&nbsp;&raquo;,
+            le d&#233;fendeur avait l'obligation...
+            <span class="v4-line-error">&#9888; Common Law</span><br><br>
+            L'article 1240 dispose que &laquo;&nbsp;tout fait quelconque
+            de l'homme...&nbsp;&raquo;
+            <span class="v4-line-error">&#9888; Citation tronqu&#233;e</span><br><br>
+            Je recommande de demander une indemnisation
+            pour le pr&#233;judice moral et physique.
+            <span class="v4-line-error">&#9888; Pas de nomenclature</span><br><br>
+            <span style="color: var(--text-tertiary); font-style: italic;">
+              [Aucune structure, aucun visa, aucune r&#233;f&#233;rence v&#233;rifiable]
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOD result -->
+      <div class="v4-good anim-slide-left">
+        <p class="v4-mockup-label v4-label-good">&#10003; R&#233;sultat avec Skill</p>
+        <div class="window-mockup">
+          <div class="window-header">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Claude + Skills Me&nbsp;Humbert</span>
+          </div>
+          <div class="window-body">
+            <strong>VISA</strong><br>
+            Vu l'article 1240 du Code civil ;<br>
+            Vu la nomenclature Dintilhac ;<br>
+            Vu le rapport d'expertise m&#233;dicale du Dr&nbsp;Martin ;
+            <span class="v4-line-ok">&#10003;</span><br><br>
+            <strong>I. SUR LA RESPONSABILIT&#201;</strong><br>
+            <strong>A. &#192; titre principal</strong><br>
+            Article 1240 du Code civil (in extenso) :
+            &laquo;&nbsp;Tout fait quelconque de l'homme, qui cause &#224;
+            autrui un dommage, oblige celui par la faute duquel
+            il est arriv&#233; &#224; le r&#233;parer.&nbsp;&raquo;
+            <span class="v4-line-ok">&#10003;</span><br><br>
+            <strong>II. SUR L'INDEMNISATION</strong><br>
+            Poste DFT (D&#233;ficit Fonctionnel Temporaire) :
+            25&nbsp;&#8364;/jour &times; 180 jours = 4&nbsp;500&nbsp;&#8364;
+            <span class="v4-line-ok">&#10003;</span><br>
+            Poste S.E. (Souffrances Endur&#233;es, 4/7) :
+            fourchette 8&nbsp;000 &#224; 12&nbsp;000&nbsp;&#8364;
+            <span class="v4-line-ok">&#10003;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="v4-verdict anim-slide-up">
+      La diff&#233;rence ? L'expertise de Me&nbsp;Humbert, int&#233;gr&#233;e dans chaque r&#233;ponse.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V5 : The Promise (benefits list)
+     ============================================================ -->
+<section id="v5" class="variant-section">
+  <span class="variant-label">V5 : La promesse</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">Les b&#233;n&#233;fices</span>
+      <h2 class="mt-lg anim-slide-up">Ce que les Skills changent dans votre quotidien</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+        Vous n'achetez pas un outil de plus. Vous activez un niveau de comp&#233;tence
+        que Claude ne poss&#232;de pas nativement.
+      </p>
+    </div>
+
+    <div class="v5-list stagger">
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#128260;</div>
+        <div class="v5-benefit-content">
+          <h4>R&#233;sultats identiques &#224; chaque utilisation</h4>
+          <p>Fini les r&#233;ponses al&#233;atoires. Les Skills garantissent une coh&#233;rence m&#233;thodologique constante, quel que soit le sujet trait&#233;.</p>
+        </div>
+      </div>
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#9201;&#65039;</div>
+        <div class="v5-benefit-content">
+          <h4>Z&#233;ro minute de re-prompting</h4>
+          <p>Plus besoin de r&#233;expliquer votre m&#233;thode &#224; chaque conversation. Claude se souvient, automatiquement, &#224; chaque session.</p>
+        </div>
+      </div>
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#9878;&#65039;</div>
+        <div class="v5-benefit-content">
+          <h4>M&#233;thodologie conforme au droit fran&#231;ais</h4>
+          <p>Structure, fondements textuels, nomenclature Dintilhac : chaque r&#233;ponse respecte les standards de la pratique fran&#231;aise.</p>
+        </div>
+      </div>
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#128737;&#65039;</div>
+        <div class="v5-benefit-content">
+          <h4>Garde-fous contre les hallucinations</h4>
+          <p>Les Skills int&#232;grent des r&#232;gles explicites qui emp&#234;chent Claude d'inventer des articles, des jurisprudences ou des r&#233;f&#233;rences.</p>
+        </div>
+      </div>
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#128268;</div>
+        <div class="v5-benefit-content">
+          <h4>Installation en un clic, b&#233;n&#233;fices permanents</h4>
+          <p>Vous installez une seule fois. Les Skills restent actifs dans Claude Desktop sans limite de dur&#233;e, sans abonnement, sans maintenance.</p>
+        </div>
+      </div>
+
+      <div class="v5-benefit anim-slide-up">
+        <div class="v5-benefit-icon">&#127942;</div>
+        <div class="v5-benefit-content">
+          <h4>L'expertise d'un sp&#233;cialiste, disponible en permanence</h4>
+          <p>20 ans de pratique de Me&nbsp;Humbert, encod&#233;s dans chaque Skill. Vous b&#233;n&#233;ficiez de sa m&#233;thodologie sans la reconstruire.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V6 : Analogy Section
+     ============================================================ -->
+<section id="v6" class="variant-section">
+  <span class="variant-label">V6 : Analogie</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">Imaginez</span>
+    </div>
+
+    <div class="v6-quote mt-2xl">
+      <p class="v6-quote-text anim-blur-in">
+        Imaginez un collaborateur qui a 20 ans d'exp&#233;rience,
+        qui ne fait jamais deux fois la m&#234;me erreur,
+        qui applique votre m&#233;thode &#224; la lettre,
+        et qui est disponible 24h/24.
+      </p>
+      <p class="v6-quote-reveal anim-slide-up mt-2xl">
+        C'est exactement ce que ces Skills font de Claude.
+      </p>
+    </div>
+
+    <div class="divider mx-auto mt-2xl anim-fade-in"></div>
+
+    <div class="v6-pillars stagger mt-2xl">
+
+      <div class="v6-pillar anim-slide-up">
+        <span class="v6-pillar-icon">&#129504;</span>
+        <h4>M&#233;moire parfaite</h4>
+        <p>Votre m&#233;thodologie est int&#233;gr&#233;e une fois pour toutes. Claude ne l'oublie jamais, ne la d&#233;forme jamais.</p>
+      </div>
+
+      <div class="v6-pillar anim-slide-up">
+        <span class="v6-pillar-icon">&#128207;</span>
+        <h4>M&#233;thode constante</h4>
+        <p>Les m&#234;mes r&#232;gles, les m&#234;mes structures, la m&#234;me rigueur &#224; chaque utilisation. Comme un collaborateur parfaitement form&#233;.</p>
+      </div>
+
+      <div class="v6-pillar anim-slide-up">
+        <span class="v6-pillar-icon">&#127769;</span>
+        <h4>Disponibilit&#233; totale</h4>
+        <p>&#192; n'importe quelle heure, n'importe quel jour. Votre assistant expert ne prend jamais de vacances.</p>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-2xl anim-fade-in">
+      <p style="max-width: 520px; margin: 0 auto; font-family: var(--font-ui); font-size: 0.95rem; color: var(--text-tertiary);">
+        Pas de jargon technique. Pas de configuration. Vous installez les Skills,
+        et Claude devient votre collaborateur le plus fiable.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V7 : How It Works (buyer perspective)
+     ============================================================ -->
+<section id="v7" class="variant-section">
+  <span class="variant-label">V7 : Parcours utilisateur</span>
+  <div class="container section-padding">
+
+    <div class="text-center">
+      <span class="tag anim-fade-in">Simple comme bonjour</span>
+      <h2 class="mt-lg anim-slide-up">Trois &#233;tapes. Z&#233;ro complication.</h2>
+      <p class="mt-md anim-slide-up" style="max-width: 580px; margin-left: auto; margin-right: auto;">
+        Pas de configuration. Pas de param&#233;trage. Vous travaillez,
+        Claude applique l'expertise de Me&nbsp;Humbert.
+      </p>
+    </div>
+
+    <div class="v7-steps stagger">
+
+      <div class="v7-step anim-slide-up">
+        <span class="v7-step-number">1</span>
+        <span class="v7-step-icon">&#128229;</span>
+        <h4>Installez le pack en un clic</h4>
+        <p>Vous recevez les 5 Skills pr&#234;ts &#224; l'emploi. Un simple glisser-d&#233;poser dans Claude Desktop suffit.</p>
+      </div>
+
+      <div class="v7-arrow anim-fade-in">
+        <svg viewBox="0 0 36 36"><polyline points="6,18 30,18" /><polyline points="22,10 30,18 22,26" /></svg>
+      </div>
+
+      <div class="v7-step anim-slide-up">
+        <span class="v7-step-number">2</span>
+        <span class="v7-step-icon">&#128172;</span>
+        <h4>Ouvrez Claude et travaillez</h4>
+        <p>Rien &#224; configurer. D&#232;s la premi&#232;re conversation, Claude conna&#238;t votre m&#233;thodologie. Posez vos questions comme d'habitude.</p>
+      </div>
+
+      <div class="v7-arrow anim-fade-in">
+        <svg viewBox="0 0 36 36"><polyline points="6,18 30,18" /><polyline points="22,10 30,18 22,26" /></svg>
+      </div>
+
+      <div class="v7-step anim-slide-up">
+        <span class="v7-step-number">3</span>
+        <span class="v7-step-icon">&#9989;</span>
+        <h4>Obtenez des r&#233;sultats conformes</h4>
+        <p>Chaque r&#233;ponse respecte la m&#233;thodologie de Me&nbsp;Humbert : structure, fondements textuels, garde-fous. &#192; chaque fois.</p>
+      </div>
+
+    </div>
+
+    <div class="v7-reassurance anim-slide-up">
+      <p class="mt-xl">
+        Pas de comp&#233;tence technique requise. Si vous savez utiliser Claude,
+        vous savez utiliser les Skills.
+      </p>
+      <a href="#" class="btn-primary" style="margin-top: var(--space-md);">
+        Obtenir le pack (150&nbsp;&#8364;)
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,4 16,10 6,16"/></svg>
+      </a>
+      <p class="mt-lg" style="font-family: var(--font-ui); font-size: 0.82rem; color: var(--text-tertiary); font-style: normal;">
+        Paiement unique. Acc&#232;s permanent. 5&nbsp;Skills inclus.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     Scripts
+     ============================================================ -->
+<script src="../styles/base.js"></script>
+
+</body>
+</html>

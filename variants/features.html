@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawIA : Skills (7 variantes)</title>
+  <link rel="stylesheet" href="../styles/base.css">
+  <style>
+    /* ============================================================
+       FEATURES VARIANTS : Scoped Styles
+       ============================================================ */
+
+    /* ---- V1 : Card Grid ---- */
+    #v1 .v1-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+    #v1 .v1-grid .card {
+      text-align: center;
+      padding: var(--space-2xl) var(--space-xl);
+      position: relative;
+    }
+    #v1 .v1-icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-lg);
+      margin: 0 auto var(--space-lg);
+      font-size: 1.8rem;
+    }
+    #v1 .v1-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--accent-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v1 .v1-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: var(--space-sm);
+    }
+    #v1 .v1-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: var(--space-lg);
+    }
+    #v1 .v1-time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green);
+      background: rgba(92, 160, 110, 0.1);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+    }
+    #v1 .v1-row-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+      max-width: 66.666%;
+      margin: 0 auto;
+    }
+    @media (max-width: 1024px) {
+      #v1 .v1-grid { grid-template-columns: repeat(2, 1fr); }
+      #v1 .v1-row-bottom { max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      #v1 .v1-grid { grid-template-columns: 1fr; }
+      #v1 .v1-row-bottom { grid-template-columns: 1fr; max-width: 100%; }
+    }
+
+    /* ---- V2 : Horizontal Scroll Cards ---- */
+    #v2 .v2-scroll-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    #v2 .v2-scroll-track {
+      display: flex;
+      gap: var(--space-xl);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: var(--space-md) var(--space-xl) var(--space-2xl);
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    #v2 .v2-scroll-track::-webkit-scrollbar { display: none; }
+    #v2 .v2-card {
+      flex: 0 0 340px;
+      scroll-snap-align: center;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: var(--space-2xl) var(--space-xl);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v2 .v2-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: radial-gradient(ellipse at 50% 0%, var(--accent-lighter) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #v2 .v2-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    #v2 .v2-card-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-xl);
+      position: relative;
+      z-index: 1;
+    }
+    #v2 .v2-card-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--accent-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v2 .v2-card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      position: relative;
+      z-index: 1;
+    }
+    #v2 .v2-card-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+    #v2 .v2-card-footer {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+    #v2 .v2-card-footer .badge { font-size: 0.78rem; }
+    #v2 .v2-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: var(--space-xl);
+    }
+    #v2 .v2-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    #v2 .v2-dot.active,
+    #v2 .v2-dot:hover {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+    #v2 .v2-arrows {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    #v2 .v2-arrow {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    #v2 .v2-arrow:hover {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+    #v2 .v2-arrow svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @media (max-width: 640px) {
+      #v2 .v2-card { flex: 0 0 280px; min-height: 380px; }
+    }
+
+    /* ---- V3 : Vertical Accordion ---- */
+    #v3 .v3-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    #v3 .v3-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v3 .v3-item:hover {
+      border-color: var(--accent-light);
+      box-shadow: var(--shadow-sm);
+    }
+    #v3 .v3-item[open] {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    #v3 .v3-summary {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-xl) var(--space-2xl);
+      cursor: pointer;
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: background var(--dur-fast);
+      user-select: none;
+    }
+    #v3 .v3-summary::-webkit-details-marker { display: none; }
+    #v3 .v3-summary::marker { display: none; content: ''; }
+    #v3 .v3-summary:hover { background: var(--bg-alt); }
+    #v3 .v3-summary-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      flex-shrink: 0;
+    }
+    #v3 .v3-summary-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--accent-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v3 .v3-summary-text {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    #v3 .v3-oneliner {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+    #v3 .v3-chevron {
+      width: 20px;
+      height: 20px;
+      stroke: var(--text-tertiary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform var(--dur-fast) var(--ease-out);
+      flex-shrink: 0;
+    }
+    #v3 .v3-item[open] .v3-chevron { transform: rotate(180deg); }
+    #v3 .v3-body {
+      padding: 0 var(--space-2xl) var(--space-2xl);
+      padding-left: calc(var(--space-2xl) + 44px + var(--space-lg));
+    }
+    #v3 .v3-body-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    #v3 .v3-detail-block h5 {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-dark);
+      margin-bottom: var(--space-sm);
+    }
+    #v3 .v3-detail-block p {
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+    #v3 .v3-guardrails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+    }
+    #v3 .v3-guardrail-tag {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--green);
+      background: rgba(92, 160, 110, 0.1);
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+    }
+    @media (max-width: 768px) {
+      #v3 .v3-body-inner { grid-template-columns: 1fr; }
+      #v3 .v3-body { padding-left: var(--space-xl); }
+      #v3 .v3-summary { padding: var(--space-lg); gap: var(--space-md); }
+      #v3 .v3-oneliner { display: none; }
+    }
+
+    /* ---- V4 : Tabbed Interface ---- */
+    #v4 .v4-tabs { max-width: 1000px; margin: 0 auto; }
+    #v4 .v4-radio { display: none; }
+    #v4 .v4-tab-bar {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-xl);
+      padding: 4px;
+      margin-bottom: var(--space-2xl);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    #v4 .v4-tab-bar::-webkit-scrollbar { display: none; }
+    #v4 .v4-tab-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: 12px 20px;
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+      white-space: nowrap;
+      user-select: none;
+    }
+    #v4 .v4-tab-label:hover { color: var(--text); background: var(--white); }
+    #v4 .v4-tab-label svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v4 .v4-panel {
+      display: none;
+      animation: fade-in-up var(--dur-normal) var(--ease-out);
+    }
+    /* CSS-only tab activation */
+    #v4 #v4-tab1:checked ~ .v4-tab-bar label[for="v4-tab1"],
+    #v4 #v4-tab2:checked ~ .v4-tab-bar label[for="v4-tab2"],
+    #v4 #v4-tab3:checked ~ .v4-tab-bar label[for="v4-tab3"],
+    #v4 #v4-tab4:checked ~ .v4-tab-bar label[for="v4-tab4"],
+    #v4 #v4-tab5:checked ~ .v4-tab-bar label[for="v4-tab5"] {
+      color: var(--white);
+      background: var(--accent);
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+    }
+    #v4 #v4-tab1:checked ~ .v4-panels .v4-panel:nth-child(1),
+    #v4 #v4-tab2:checked ~ .v4-panels .v4-panel:nth-child(2),
+    #v4 #v4-tab3:checked ~ .v4-panels .v4-panel:nth-child(3),
+    #v4 #v4-tab4:checked ~ .v4-panels .v4-panel:nth-child(4),
+    #v4 #v4-tab5:checked ~ .v4-panels .v4-panel:nth-child(5) {
+      display: block;
+    }
+    #v4 .v4-panel-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    #v4 .v4-panel-text h3 {
+      margin-bottom: var(--space-md);
+    }
+    #v4 .v4-panel-text p {
+      margin-bottom: var(--space-lg);
+    }
+    #v4 .v4-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    #v4 .v4-benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    #v4 .v4-benefit-check {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(92, 160, 110, 0.12);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    #v4 .v4-benefit-check svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @media (max-width: 768px) {
+      #v4 .v4-panel-inner { grid-template-columns: 1fr; }
+      #v4 .v4-tab-label { font-size: 0.75rem; padding: 10px 14px; gap: 4px; }
+      #v4 .v4-tab-label svg { width: 14px; height: 14px; }
+    }
+
+    /* ---- V5 : Numbered List ---- */
+    #v5 .v5-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    #v5 .v5-item {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    #v5 .v5-item:nth-child(even) {
+      direction: rtl;
+    }
+    #v5 .v5-item:nth-child(even) > * {
+      direction: ltr;
+    }
+    #v5 .v5-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      color: var(--accent-light);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-align: center;
+    }
+    #v5 .v5-content h4 {
+      margin-bottom: var(--space-sm);
+    }
+    #v5 .v5-content p {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    #v5 .v5-content .badge {
+      margin-top: var(--space-md);
+    }
+    #v5 .v5-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #v5 .v5-visual-block {
+      width: 100%;
+      max-width: 280px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    #v5 .v5-visual-block svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      margin: 0 auto var(--space-md);
+    }
+    #v5 .v5-visual-label {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+    @media (max-width: 768px) {
+      #v5 .v5-item {
+        grid-template-columns: 60px 1fr;
+        gap: var(--space-lg);
+      }
+      #v5 .v5-item:nth-child(even) { direction: ltr; }
+      #v5 .v5-visual { display: none; }
+      #v5 .v5-number { font-size: 2.5rem; }
+    }
+
+    /* ---- V6 : Feature Showcase ---- */
+    #v6 .v6-featured {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+      margin-bottom: var(--space-2xl);
+      transition: box-shadow var(--dur-normal) var(--ease-out);
+    }
+    #v6 .v6-featured:hover { box-shadow: var(--shadow-lg); }
+    #v6 .v6-featured-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-lg);
+    }
+    #v6 .v6-featured-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v6 .v6-featured-text h3 { margin-bottom: var(--space-md); }
+    #v6 .v6-featured-text p { margin-bottom: var(--space-lg); font-size: 1.05rem; }
+    #v6 .v6-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-xl);
+    }
+    #v6 .v6-small-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      transition: all var(--dur-normal) var(--ease-out);
+    }
+    #v6 .v6-small-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: var(--accent-light);
+    }
+    #v6 .v6-small-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+    }
+    #v6 .v6-small-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v6 .v6-small-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-xs);
+    }
+    #v6 .v6-small-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    #v6 .v6-small-card .badge { margin-top: var(--space-md); }
+    @media (max-width: 768px) {
+      #v6 .v6-featured {
+        grid-template-columns: 1fr;
+        padding: var(--space-xl);
+      }
+      #v6 .v6-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ---- V7 : Carousel ---- */
+    #v7 .v7-carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    #v7 .v7-slides {
+      display: flex;
+      transition: transform var(--dur-slower) var(--ease-out);
+    }
+    #v7 .v7-slide {
+      flex: 0 0 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+      padding: var(--space-3xl);
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+    }
+    #v7 .v7-slide-icon {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-xl);
+    }
+    #v7 .v7-slide-icon svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--accent-dark);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v7 .v7-slide-content h3 { margin-bottom: var(--space-md); }
+    #v7 .v7-slide-content p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: var(--space-lg);
+    }
+    #v7 .v7-slide-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    #v7 .v7-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+    #v7 .v7-arrow {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    #v7 .v7-arrow:hover {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    #v7 .v7-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #v7 .v7-dots {
+      display: flex;
+      gap: 8px;
+    }
+    #v7 .v7-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-strong);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    #v7 .v7-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+    #v7 .v7-counter {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+    }
+    @media (max-width: 768px) {
+      #v7 .v7-slide {
+        grid-template-columns: 1fr;
+        padding: var(--space-xl);
+        text-align: center;
+      }
+      #v7 .v7-slide-icon {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto;
+      }
+      #v7 .v7-slide-icon svg { width: 36px; height: 36px; }
+      #v7 .v7-slide-meta { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ---- Navigation ---- -->
+<nav class="variant-nav">
+  <span class="nav-title">Features / 5 Skills</span>
+  <a href="#v1" class="active">V1 Card Grid</a>
+  <a href="#v2">V2 H-Scroll</a>
+  <a href="#v3">V3 Accordion</a>
+  <a href="#v4">V4 Tabs</a>
+  <a href="#v5">V5 Numbered</a>
+  <a href="#v6">V6 Showcase</a>
+  <a href="#v7">V7 Carousel</a>
+</nav>
+
+
+<!-- ============================================================
+     V1 : Card Grid
+     ============================================================ -->
+<section id="v1" class="variant-section" style="background: var(--bg);">
+  <span class="variant-label">V1 : Card Grid</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Pack 5 Skills</span>
+      <h2 class="mt-md">5 Skills, des heures gagnees chaque semaine</h2>
+      <p class="mt-md" style="max-width:640px; margin-left:auto; margin-right:auto;">Chaque Skill est concu pour automatiser une tache juridique precise, avec des garde-fous integres pour garantir la conformite.</p>
+    </div>
+
+    <div class="v1-grid stagger mb-xl">
+      <!-- Skill 1 -->
+      <div class="card anim-scale-in">
+        <div class="v1-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="v1-name">Conventions d'honoraires</div>
+        <div class="v1-desc">Generation de conventions conformes, personnalisees a la specialite de l'avocat. Integre les mentions obligatoires et les clauses de revision.</div>
+        <span class="v1-time-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          45 min gagnees par convention
+        </span>
+      </div>
+      <!-- Skill 2 -->
+      <div class="card anim-scale-in">
+        <div class="v1-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+        </div>
+        <div class="v1-name">Contre-argumentation</div>
+        <div class="v1-desc">Analyse des arguments adverses et construction systematique de contre-arguments structures. Identifie les failles logiques et juridiques.</div>
+        <span class="v1-time-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2h gagnees par dossier
+        </span>
+      </div>
+      <!-- Skill 3 -->
+      <div class="card anim-scale-in">
+        <div class="v1-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/><path d="M4.93 4.93l14.14 14.14"/></svg>
+        </div>
+        <div class="v1-name">Conclusions au fond</div>
+        <div class="v1-desc">Redaction structuree de conclusions avec visa des textes, moyens principaux et subsidiaires. Respecte les exigences formelles des juridictions.</div>
+        <span class="v1-time-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          3h gagnees par jeu de conclusions
+        </span>
+      </div>
+    </div>
+
+    <div class="v1-row-bottom stagger">
+      <!-- Skill 4 -->
+      <div class="card anim-scale-in">
+        <div class="v1-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <div class="v1-name">Analyse jurisprudentielle</div>
+        <div class="v1-desc">Recherche et synthese de jurisprudence pertinente avec verification des sources. Chaque reference est validee et contextualisee.</div>
+        <span class="v1-time-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          1h30 gagnees par recherche
+        </span>
+      </div>
+      <!-- Skill 5 -->
+      <div class="card anim-scale-in">
+        <div class="v1-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="v1-name">Mise en demeure</div>
+        <div class="v1-desc">Redaction de mises en demeure formelles avec toutes les mentions obligatoires. Adapte le ton et les references legales au contexte.</div>
+        <span class="v1-time-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          30 min gagnees par courrier
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V2 : Horizontal Scroll Cards
+     ============================================================ -->
+<section id="v2" class="variant-section" style="background: var(--bg-alt);">
+  <span class="variant-label">V2 : Horizontal Scroll</span>
+  <div class="section-padding" style="width: 100%;">
+    <div class="container text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">5 Skills specialises</span>
+      <h2 class="mt-md">Des outils penses pour les avocats</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">Chaque Skill a ete concu avec des avocats en exercice pour repondre a des besoins concrets du quotidien.</p>
+    </div>
+
+    <div class="v2-scroll-wrapper">
+      <div class="v2-scroll-track" id="v2-track">
+        <!-- Card 1 -->
+        <div class="v2-card anim-slide-up">
+          <div class="v2-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="v2-card-name">Conventions d'honoraires</div>
+          <div class="v2-card-desc">Generez des conventions d'honoraires conformes en quelques clics. Le Skill integre automatiquement les mentions obligatoires, adapte les clauses a votre specialite et propose des modeles de revision tarifaire.</div>
+          <div class="v2-card-footer">
+            <span class="badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              45 min gagnees par document
+            </span>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="v2-card anim-slide-up">
+          <div class="v2-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+          </div>
+          <div class="v2-card-name">Contre-argumentation</div>
+          <div class="v2-card-desc">Soumettez les arguments adverses, le Skill decortique chaque point, identifie les faiblesses et construit une contre-argumentation structuree. Chaque reponse cite les textes applicables.</div>
+          <div class="v2-card-footer">
+            <span class="badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2h gagnees par dossier contentieux
+            </span>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="v2-card anim-slide-up">
+          <div class="v2-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+          </div>
+          <div class="v2-card-name">Conclusions au fond</div>
+          <div class="v2-card-desc">Redigez des conclusions structurees avec visa des textes, distinction des moyens principaux et subsidiaires. Le Skill respecte les exigences formelles de chaque juridiction.</div>
+          <div class="v2-card-footer">
+            <span class="badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              3h gagnees par jeu de conclusions
+            </span>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="v2-card anim-slide-up">
+          <div class="v2-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="v2-card-name">Analyse jurisprudentielle</div>
+          <div class="v2-card-desc">Recherchez et synthetisez la jurisprudence pertinente pour votre dossier. Chaque decision citee est verifiee, contextualisee et accompagnee d'une analyse de sa portee actuelle.</div>
+          <div class="v2-card-footer">
+            <span class="badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              1h30 gagnees par recherche
+            </span>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="v2-card anim-slide-up">
+          <div class="v2-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="v2-card-name">Mise en demeure</div>
+          <div class="v2-card-desc">Redigez des mises en demeure formelles avec toutes les mentions obligatoires integrees. Le Skill adapte le ton, les references legales et les delais au contexte de votre dossier.</div>
+          <div class="v2-card-footer">
+            <span class="badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              30 min gagnees par courrier
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="v2-arrows">
+        <button class="v2-arrow" onclick="document.getElementById('v2-track').scrollBy({left:-360,behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="v2-arrow" onclick="document.getElementById('v2-track').scrollBy({left:360,behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+      </div>
+
+      <div class="v2-dots" id="v2-dots">
+        <span class="v2-dot active"></span>
+        <span class="v2-dot"></span>
+        <span class="v2-dot"></span>
+        <span class="v2-dot"></span>
+        <span class="v2-dot"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V3 : Vertical Accordion
+     ============================================================ -->
+<section id="v3" class="variant-section" style="background: var(--bg);">
+  <span class="variant-label">V3 : Accordion</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Explorez chaque Skill</span>
+      <h2 class="mt-md">5 Skills, zero approximation</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">Cliquez sur chaque Skill pour decouvrir son fonctionnement, un exemple concret et les garde-fous qui garantissent la fiabilite.</p>
+    </div>
+
+    <div class="v3-list stagger">
+      <!-- Skill 1 -->
+      <details class="v3-item anim-slide-up" open>
+        <summary class="v3-summary">
+          <span class="v3-summary-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </span>
+          <span class="v3-summary-text">
+            <span>Conventions d'honoraires</span>
+            <span class="v3-oneliner">Conventions conformes en quelques clics</span>
+          </span>
+          <svg class="v3-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="v3-body">
+          <div class="v3-body-inner">
+            <div class="v3-detail-block">
+              <h5>Description</h5>
+              <p>Generation automatique de conventions d'honoraires personnalisees. Le Skill integre les mentions obligatoires (loi du 31 decembre 1971, decret du 12 juillet 2005) et adapte les clauses a votre domaine d'exercice.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Exemple concret</h5>
+              <p>Un avocat en droit social genere une convention forfaitaire pour un licenciement : en 3 minutes au lieu de 45, avec toutes les mentions legales incluses.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Temps gagne</h5>
+              <p style="color: var(--green); font-weight: 600;">45 minutes par convention</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Garde-fous</h5>
+              <div class="v3-guardrails">
+                <span class="v3-guardrail-tag">Mentions obligatoires verifiees</span>
+                <span class="v3-guardrail-tag">Conformite decret 2005</span>
+                <span class="v3-guardrail-tag">Anti-clauses abusives</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Skill 2 -->
+      <details class="v3-item anim-slide-up">
+        <summary class="v3-summary">
+          <span class="v3-summary-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+          </span>
+          <span class="v3-summary-text">
+            <span>Contre-argumentation</span>
+            <span class="v3-oneliner">Deconstruction methodique des arguments adverses</span>
+          </span>
+          <svg class="v3-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="v3-body">
+          <div class="v3-body-inner">
+            <div class="v3-detail-block">
+              <h5>Description</h5>
+              <p>Analysez les conclusions adverses point par point. Le Skill identifie les failles logiques, les erreurs de droit et les jurisprudences depassees pour construire une reponse structuree.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Exemple concret</h5>
+              <p>Face a 12 pages de conclusions adverses en droit commercial, le Skill produit une contre-argumentation structuree en 15 minutes (au lieu de 2h de travail manuel).</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Temps gagne</h5>
+              <p style="color: var(--green); font-weight: 600;">2 heures par dossier contentieux</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Garde-fous</h5>
+              <div class="v3-guardrails">
+                <span class="v3-guardrail-tag">Sources verifiees</span>
+                <span class="v3-guardrail-tag">Anti-hallucination</span>
+                <span class="v3-guardrail-tag">Structure argumentative validee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Skill 3 -->
+      <details class="v3-item anim-slide-up">
+        <summary class="v3-summary">
+          <span class="v3-summary-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+          </span>
+          <span class="v3-summary-text">
+            <span>Conclusions au fond</span>
+            <span class="v3-oneliner">Redaction structuree avec visa des textes</span>
+          </span>
+          <svg class="v3-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="v3-body">
+          <div class="v3-body-inner">
+            <div class="v3-detail-block">
+              <h5>Description</h5>
+              <p>Redaction complete de conclusions au fond avec visa des textes applicables, presentation des faits, discussion juridique et dispositif. Distinction claire entre moyens principaux et subsidiaires.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Exemple concret</h5>
+              <p>Pour une affaire de responsabilite civile, le Skill redige un jeu complet de conclusions (15 pages) en 20 minutes, avec les textes vises et la jurisprudence pertinente.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Temps gagne</h5>
+              <p style="color: var(--green); font-weight: 600;">3 heures par jeu de conclusions</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Garde-fous</h5>
+              <div class="v3-guardrails">
+                <span class="v3-guardrail-tag">Conformite procedurale</span>
+                <span class="v3-guardrail-tag">Textes verifies</span>
+                <span class="v3-guardrail-tag">Structure CPC respectee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Skill 4 -->
+      <details class="v3-item anim-slide-up">
+        <summary class="v3-summary">
+          <span class="v3-summary-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <span class="v3-summary-text">
+            <span>Analyse jurisprudentielle</span>
+            <span class="v3-oneliner">Jurisprudence verifiee et contextualisee</span>
+          </span>
+          <svg class="v3-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="v3-body">
+          <div class="v3-body-inner">
+            <div class="v3-detail-block">
+              <h5>Description</h5>
+              <p>Recherche et analyse de la jurisprudence pertinente pour votre dossier. Chaque decision est verifiee, accompagnee de sa reference exacte et d'une synthese de sa portee.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Exemple concret</h5>
+              <p>Pour un litige en droit de la construction, le Skill identifie et synthetise 8 decisions pertinentes de la Cour de cassation en 10 minutes, toutes verifiees.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Temps gagne</h5>
+              <p style="color: var(--green); font-weight: 600;">1h30 par recherche jurisprudentielle</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Garde-fous</h5>
+              <div class="v3-guardrails">
+                <span class="v3-guardrail-tag">References verifiees</span>
+                <span class="v3-guardrail-tag">Anti-hallucination renforcee</span>
+                <span class="v3-guardrail-tag">Portee actualisee</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Skill 5 -->
+      <details class="v3-item anim-slide-up">
+        <summary class="v3-summary">
+          <span class="v3-summary-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span class="v3-summary-text">
+            <span>Mise en demeure</span>
+            <span class="v3-oneliner">Courriers formels avec mentions obligatoires</span>
+          </span>
+          <svg class="v3-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="v3-body">
+          <div class="v3-body-inner">
+            <div class="v3-detail-block">
+              <h5>Description</h5>
+              <p>Redaction de mises en demeure formelles integrant toutes les mentions obligatoires. Le Skill adapte le ton, les references legales et les delais impartis au contexte specifique du dossier.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Exemple concret</h5>
+              <p>Pour un impaye de loyer commercial, le Skill redige une mise en demeure complete avec references au bail et aux articles du Code civil en 5 minutes.</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Temps gagne</h5>
+              <p style="color: var(--green); font-weight: 600;">30 minutes par courrier</p>
+            </div>
+            <div class="v3-detail-block">
+              <h5>Garde-fous</h5>
+              <div class="v3-guardrails">
+                <span class="v3-guardrail-tag">Mentions legales verifiees</span>
+                <span class="v3-guardrail-tag">Delais conformes</span>
+                <span class="v3-guardrail-tag">Ton professionnel controle</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V4 : Tabbed Interface
+     ============================================================ -->
+<section id="v4" class="variant-section" style="background: var(--bg-alt);">
+  <span class="variant-label">V4 : Tabs</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Interface detaillee</span>
+      <h2 class="mt-md">Decouvrez chaque Skill en detail</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">Selectionnez un Skill pour voir comment il fonctionne, ce qu'il produit et pourquoi vous pouvez lui faire confiance.</p>
+    </div>
+
+    <div class="v4-tabs anim-fade-in">
+      <!-- Radio inputs -->
+      <input type="radio" name="v4-tabs" id="v4-tab1" class="v4-radio" checked>
+      <input type="radio" name="v4-tabs" id="v4-tab2" class="v4-radio">
+      <input type="radio" name="v4-tabs" id="v4-tab3" class="v4-radio">
+      <input type="radio" name="v4-tabs" id="v4-tab4" class="v4-radio">
+      <input type="radio" name="v4-tabs" id="v4-tab5" class="v4-radio">
+
+      <!-- Tab bar -->
+      <div class="v4-tab-bar">
+        <label for="v4-tab1" class="v4-tab-label">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Conventions
+        </label>
+        <label for="v4-tab2" class="v4-tab-label">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Contre-argumentation
+        </label>
+        <label for="v4-tab3" class="v4-tab-label">
+          <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+          Conclusions
+        </label>
+        <label for="v4-tab4" class="v4-tab-label">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Jurisprudence
+        </label>
+        <label for="v4-tab5" class="v4-tab-label">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Mise en demeure
+        </label>
+      </div>
+
+      <!-- Panels -->
+      <div class="v4-panels">
+        <!-- Panel 1 -->
+        <div class="v4-panel">
+          <div class="v4-panel-inner">
+            <div class="v4-panel-text">
+              <h3>Conventions d'honoraires</h3>
+              <p>Generez des conventions d'honoraires personnalisees et conformes a la reglementation en vigueur. Le Skill integre automatiquement les mentions imposees par la loi du 31 decembre 1971 et le decret du 12 juillet 2005, adapte les clauses a votre domaine de specialite et propose des options de facturation (forfait, taux horaire, honoraires de resultat).</p>
+              <div class="v4-benefits">
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Mentions obligatoires integrees automatiquement</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Personnalisation par domaine d'exercice</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Detection des clauses potentiellement abusives</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>45 min gagnees par convention generee</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="window-mockup">
+                <div class="window-header">
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-title">convention_honoraires.md</span>
+                </div>
+                <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+                  <div style="color:var(--accent-dark); font-weight:600; margin-bottom:8px;">CONVENTION D'HONORAIRES</div>
+                  <div style="margin-bottom:6px;">Entre : Me Dupont, Avocat au Barreau de Paris</div>
+                  <div style="margin-bottom:6px;">Et : Societe XYZ, representee par...</div>
+                  <div style="margin-bottom:12px; padding-top:8px; border-top:1px dashed var(--border);">
+                    <span style="color:var(--accent-dark);">Art. 1</span> Objet de la mission<br>
+                    <span style="color:var(--accent-dark);">Art. 2</span> Honoraires (forfait : 2 500 EUR HT)<br>
+                    <span style="color:var(--accent-dark);">Art. 3</span> Modalites de reglement<br>
+                    <span style="color:var(--accent-dark);">Art. 4</span> Information du client (art. 10 loi 71-1130)
+                  </div>
+                  <div style="color:var(--green); font-size:0.75rem;">Toutes les mentions obligatoires sont presentes.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="v4-panel">
+          <div class="v4-panel-inner">
+            <div class="v4-panel-text">
+              <h3>Contre-argumentation</h3>
+              <p>Soumettez les conclusions ou arguments adverses et obtenez une contre-argumentation structuree point par point. Le Skill analyse chaque moyen souleve, identifie les failles juridiques et logiques, puis construit une reponse argumentee avec les textes et la jurisprudence appropriee.</p>
+              <div class="v4-benefits">
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Analyse point par point des arguments adverses</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Identification des failles logiques et juridiques</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>References aux textes et jurisprudences verifiees</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>2 heures gagnees par dossier contentieux</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="window-mockup">
+                <div class="window-header">
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-title">contre_argumentation.md</span>
+                </div>
+                <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+                  <div style="color:var(--accent-dark); font-weight:600; margin-bottom:8px;">ANALYSE DES ARGUMENTS ADVERSES</div>
+                  <div style="margin-bottom:6px;"><span style="color:var(--red);">Argument 1 :</span> « Le contrat est nul pour vice de consentement »</div>
+                  <div style="margin-bottom:10px; padding-left:12px; border-left:2px solid var(--accent);">
+                    <strong>Reponse :</strong> L'article 1130 du Code civil exige la preuve d'un vice determinant. Or, la partie adverse ne demontre aucun element...<br>
+                    <span style="color:var(--green); font-size:0.75rem;">Cass. civ. 1re, 3 mai 2018, n. 17-11.132</span>
+                  </div>
+                  <div style="margin-bottom:6px;"><span style="color:var(--red);">Argument 2 :</span> « Prescription de l'action »</div>
+                  <div style="padding-left:12px; border-left:2px solid var(--accent);">
+                    <strong>Reponse :</strong> Le point de depart de la prescription quinquennale (art. 2224 C. civ.) se situe...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="v4-panel">
+          <div class="v4-panel-inner">
+            <div class="v4-panel-text">
+              <h3>Conclusions au fond</h3>
+              <p>Redigez des conclusions au fond structurees respectant les exigences du Code de procedure civile. Le Skill organise automatiquement le visa des textes, l'expose des faits, la discussion juridique et le dispositif, en distinguant moyens principaux et subsidiaires.</p>
+              <div class="v4-benefits">
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Structure conforme au CPC (art. 753 et suivants)</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Distinction moyens principaux et subsidiaires</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Visa des textes et jurisprudences integre</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>3 heures gagnees par jeu de conclusions</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="window-mockup">
+                <div class="window-header">
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-title">conclusions_fond.md</span>
+                </div>
+                <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+                  <div style="color:var(--accent-dark); font-weight:600; margin-bottom:8px;">CONCLUSIONS AU FOND</div>
+                  <div style="margin-bottom:8px; text-transform:uppercase; font-size:0.7rem; letter-spacing:0.05em; color:var(--text-tertiary);">Tribunal judiciaire de Paris, 3e chambre</div>
+                  <div style="margin-bottom:6px;"><strong>Visa :</strong> Art. 1231-1 et s. du Code civil</div>
+                  <div style="margin-bottom:6px;"><strong>I. EXPOSE DES FAITS</strong></div>
+                  <div style="margin-bottom:6px; padding-left:12px; color:var(--text-secondary);">Attendu que par contrat du 15 mars 2024...</div>
+                  <div style="margin-bottom:6px;"><strong>II. DISCUSSION</strong></div>
+                  <div style="padding-left:12px; color:var(--text-secondary);">A titre principal : Sur la responsabilite contractuelle...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4 -->
+        <div class="v4-panel">
+          <div class="v4-panel-inner">
+            <div class="v4-panel-text">
+              <h3>Analyse jurisprudentielle</h3>
+              <p>Obtenez une recherche jurisprudentielle approfondie et fiable pour votre dossier. Le Skill identifie les decisions pertinentes, verifie chaque reference (numero de pourvoi, date, chambre) et vous livre une synthese exploitable avec l'analyse de la portee de chaque arret.</p>
+              <div class="v4-benefits">
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Chaque reference est verifiee (anti-hallucination)</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Analyse de la portee et de l'actualite de la decision</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Syntheses exploitables directement dans vos ecritures</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>1h30 gagnees par recherche jurisprudentielle</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="window-mockup">
+                <div class="window-header">
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-title">analyse_jurisprudence.md</span>
+                </div>
+                <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+                  <div style="color:var(--accent-dark); font-weight:600; margin-bottom:8px;">RECHERCHE JURISPRUDENTIELLE</div>
+                  <div style="margin-bottom:6px; font-size:0.75rem; color:var(--text-tertiary);">Theme : responsabilite du fait des produits defectueux</div>
+                  <div style="margin-bottom:10px; padding:8px; background:var(--bg-alt); border-radius:6px;">
+                    <strong>1. Cass. civ. 1re, 12 juill. 2022, n. 21-15.809</strong><br>
+                    <span style="color:var(--text-secondary);">La Cour affirme que la preuve du defaut peut resulter de presomptions graves, precises et concordantes...</span><br>
+                    <span style="color:var(--green); font-size:0.72rem;">Reference verifiee</span>
+                  </div>
+                  <div style="padding:8px; background:var(--bg-alt); border-radius:6px;">
+                    <strong>2. CJUE, 21 juin 2017, aff. C-621/15</strong><br>
+                    <span style="color:var(--text-secondary);">Sur l'interpretation de la directive 85/374/CEE...</span><br>
+                    <span style="color:var(--green); font-size:0.72rem;">Reference verifiee</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 5 -->
+        <div class="v4-panel">
+          <div class="v4-panel-inner">
+            <div class="v4-panel-text">
+              <h3>Mise en demeure</h3>
+              <p>Redigez des mises en demeure formelles professionnelles en quelques minutes. Le Skill integre les mentions obligatoires, adapte les references legales au contexte du litige et propose un ton adapte (amiable, ferme, contentieux imminent).</p>
+              <div class="v4-benefits">
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Mentions obligatoires incluses automatiquement</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Adaptation du ton selon le contexte</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>Delais et references legales pertinents</span>
+                </div>
+                <div class="v4-benefit">
+                  <span class="v4-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span>30 minutes gagnees par courrier formel</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="window-mockup">
+                <div class="window-header">
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-dot"></span>
+                  <span class="window-title">mise_en_demeure.md</span>
+                </div>
+                <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+                  <div style="color:var(--accent-dark); font-weight:600; margin-bottom:8px;">MISE EN DEMEURE</div>
+                  <div style="margin-bottom:6px; font-size:0.75rem; color:var(--text-tertiary);">Lettre recommandee avec accuse de reception</div>
+                  <div style="margin-bottom:8px;">
+                    Madame, Monsieur,<br><br>
+                    Par la presente, et en ma qualite de conseil de la societe ABC, je vous mets en demeure de proceder au paiement de la somme de 15 000 EUR...
+                  </div>
+                  <div style="margin-bottom:6px;">
+                    <strong>Fondement :</strong> Art. 1231 et s. du Code civil<br>
+                    <strong>Delai :</strong> 15 jours a compter de la reception
+                  </div>
+                  <div style="color:var(--green); font-size:0.75rem;">Toutes les mentions obligatoires sont presentes.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V5 : Numbered List with Visuals
+     ============================================================ -->
+<section id="v5" class="variant-section" style="background: var(--bg);">
+  <span class="variant-label">V5 : Numbered List</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Le Pack complet</span>
+      <h2 class="mt-md">5 Skills pour couvrir l'essentiel</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">De la convention d'honoraires a la mise en demeure, chaque etape cle du travail de l'avocat est couverte par un Skill dedie.</p>
+    </div>
+
+    <div class="v5-list">
+      <!-- Item 1 -->
+      <div class="v5-item anim-slide-right">
+        <div class="v5-number">01</div>
+        <div class="v5-content">
+          <h4>Conventions d'honoraires</h4>
+          <p>Generation de conventions conformes, personnalisees a votre specialite. Integre automatiquement les mentions obligatoires et detecte les clauses potentiellement abusives.</p>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            45 min gagnees
+          </span>
+        </div>
+        <div class="v5-visual">
+          <div class="v5-visual-block">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <div class="v5-visual-label">Convention generee et verifiee</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="v5-item anim-slide-left">
+        <div class="v5-number">02</div>
+        <div class="v5-content">
+          <h4>Contre-argumentation</h4>
+          <p>Analyse des arguments adverses et construction systematique de contre-arguments. Identifie les failles logiques et cite les textes applicables pour chaque reponse.</p>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            2h gagnees par dossier
+          </span>
+        </div>
+        <div class="v5-visual">
+          <div class="v5-visual-block">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+            <div class="v5-visual-label">Arguments deconstruits et refutes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="v5-item anim-slide-right">
+        <div class="v5-number">03</div>
+        <div class="v5-content">
+          <h4>Conclusions au fond</h4>
+          <p>Redaction structuree de conclusions avec visa des textes, moyens principaux et subsidiaires. Respecte les exigences formelles du Code de procedure civile pour chaque juridiction.</p>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            3h gagnees par conclusions
+          </span>
+        </div>
+        <div class="v5-visual">
+          <div class="v5-visual-block">
+            <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+            <div class="v5-visual-label">Conclusions structurees et conformes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="v5-item anim-slide-left">
+        <div class="v5-number">04</div>
+        <div class="v5-content">
+          <h4>Analyse jurisprudentielle</h4>
+          <p>Recherche et synthese de jurisprudence pertinente avec verification de chaque source. Les decisions sont contextualisees et leur portee actuelle est analysee.</p>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            1h30 gagnees par recherche
+          </span>
+        </div>
+        <div class="v5-visual">
+          <div class="v5-visual-block">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <div class="v5-visual-label">Jurisprudence verifiee et synthetisee</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="v5-item anim-slide-right">
+        <div class="v5-number">05</div>
+        <div class="v5-content">
+          <h4>Mise en demeure</h4>
+          <p>Redaction de mises en demeure formelles avec les mentions obligatoires integrees. Le Skill adapte le ton, les references legales et les delais impartis au contexte du dossier.</p>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            30 min gagnees par courrier
+          </span>
+        </div>
+        <div class="v5-visual">
+          <div class="v5-visual-block">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div class="v5-visual-label">Mise en demeure prete a envoyer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V6 : Feature Showcase (one large + grid)
+     ============================================================ -->
+<section id="v6" class="variant-section" style="background: var(--bg-alt);">
+  <span class="variant-label">V6 : Showcase</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Skill phare</span>
+      <h2 class="mt-md">Un assistant juridique complet</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">Decouvrez le Skill le plus utilise par nos avocats partenaires, puis explorez les quatre autres outils du Pack.</p>
+    </div>
+
+    <!-- Featured skill -->
+    <div class="v6-featured anim-scale-in">
+      <div class="v6-featured-text">
+        <div class="v6-featured-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="tag mb-md" style="display:inline-block;">Skill le plus utilise</span>
+        <h3 class="mt-md">Conventions d'honoraires</h3>
+        <p>Generation de conventions d'honoraires personnalisees et conformes a la reglementation. Le Skill integre automatiquement les mentions imposees par la loi, adapte les clauses a votre specialite et detecte les formulations potentiellement problematiques. Resultat : 45 minutes gagnees par convention, avec la certitude d'un document conforme.</p>
+        <div style="display:flex; gap:var(--space-sm); flex-wrap:wrap; margin-top:var(--space-lg);">
+          <span class="v1-time-badge" style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-ui); font-size:0.78rem; font-weight:600; color:var(--green); background:rgba(92,160,110,0.1); padding:5px 14px; border-radius:var(--radius-full);">45 min gagnees</span>
+          <span class="tag">Mentions verifiees</span>
+          <span class="tag">Anti-clauses abusives</span>
+        </div>
+      </div>
+      <div>
+        <div class="window-mockup">
+          <div class="window-header">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">LawIA : Conventions d'honoraires</span>
+          </div>
+          <div class="window-body" style="font-size:0.8rem; line-height:1.6;">
+            <div style="color:var(--accent-dark); font-weight:600; margin-bottom:10px;">CONVENTION D'HONORAIRES</div>
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+              <span style="font-size:0.7rem; background:var(--accent-light); color:var(--accent-dark); padding:2px 8px; border-radius:20px;">Droit social</span>
+              <span style="font-size:0.7rem; background:rgba(92,160,110,0.1); color:var(--green); padding:2px 8px; border-radius:20px;">Conforme</span>
+            </div>
+            <div style="margin-bottom:8px;">
+              <strong>Parties :</strong><br>
+              Me Martin, Avocat au Barreau de Lyon<br>
+              M. Durand Jean, ne le 12/03/1985
+            </div>
+            <div style="margin-bottom:8px;">
+              <strong>Mission :</strong> Defense dans le cadre d'un licenciement pour faute grave
+            </div>
+            <div style="margin-bottom:8px;">
+              <strong>Honoraires :</strong> Forfait de 3 000 EUR HT (3 600 EUR TTC)
+            </div>
+            <div style="border-top:1px dashed var(--border); padding-top:8px; margin-top:8px;">
+              <span style="color:var(--green); font-size:0.72rem;">6/6 mentions obligatoires presentes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 smaller cards -->
+    <div class="v6-grid stagger mt-xl">
+      <div class="v6-small-card anim-slide-up">
+        <div class="v6-small-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+        </div>
+        <h4>Contre-argumentation</h4>
+        <p>Analyse des arguments adverses et construction systematique de contre-arguments structures avec references juridiques verifiees.</p>
+        <span class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          2h gagnees par dossier
+        </span>
+      </div>
+
+      <div class="v6-small-card anim-slide-up">
+        <div class="v6-small-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+        </div>
+        <h4>Conclusions au fond</h4>
+        <p>Redaction structuree de conclusions avec visa des textes, moyens principaux et subsidiaires, conforme aux exigences procedurales.</p>
+        <span class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          3h gagnees par conclusions
+        </span>
+      </div>
+
+      <div class="v6-small-card anim-slide-up">
+        <div class="v6-small-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h4>Analyse jurisprudentielle</h4>
+        <p>Recherche et synthese de jurisprudence pertinente avec verification de chaque source et analyse de sa portee actuelle.</p>
+        <span class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          1h30 gagnees par recherche
+        </span>
+      </div>
+
+      <div class="v6-small-card anim-slide-up">
+        <div class="v6-small-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h4>Mise en demeure</h4>
+        <p>Redaction de mises en demeure formelles avec mentions obligatoires, references legales adaptees et ton professionnel controle.</p>
+        <span class="badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          30 min gagnees par courrier
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     V7 : Carousel / Slideshow
+     ============================================================ -->
+<section id="v7" class="variant-section" style="background: var(--bg);">
+  <span class="variant-label">V7 : Carousel</span>
+  <div class="container section-padding">
+    <div class="text-center mb-xl anim-slide-up">
+      <span class="tag mb-md" style="display:inline-block;">Parcourez les Skills</span>
+      <h2 class="mt-md">Explorez le Pack, Skill par Skill</h2>
+      <p class="mt-md" style="max-width:600px; margin:var(--space-md) auto 0;">Naviguez entre les 5 Skills pour decouvrir en detail ce que chacun peut faire pour vous.</p>
+    </div>
+
+    <div class="v7-carousel anim-scale-in">
+      <div class="v7-slides" id="v7-slides">
+        <!-- Slide 1 -->
+        <div class="v7-slide">
+          <div class="v7-slide-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="v7-slide-content">
+            <h3>Conventions d'honoraires</h3>
+            <p>Generez des conventions d'honoraires personnalisees et conformes a la reglementation. Le Skill integre automatiquement les mentions obligatoires, adapte les clauses a votre domaine d'exercice et detecte les formulations problematiques. Exemple concret : un avocat en droit social genere une convention forfaitaire complete en 3 minutes au lieu de 45.</p>
+            <div class="v7-slide-meta">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                45 min gagnees
+              </span>
+              <span class="tag">Mentions verifiees</span>
+              <span class="tag">Anti-clauses abusives</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="v7-slide">
+          <div class="v7-slide-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 12 15 16 10"/></svg>
+          </div>
+          <div class="v7-slide-content">
+            <h3>Contre-argumentation</h3>
+            <p>Soumettez les arguments adverses et obtenez une contre-argumentation structuree. Le Skill decortique chaque point, identifie les failles logiques et juridiques, puis construit une reponse argumentee en citant les textes applicables. Exemple : 12 pages de conclusions adverses analysees et refutees en 15 minutes.</p>
+            <div class="v7-slide-meta">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                2h gagnees par dossier
+              </span>
+              <span class="tag">Anti-hallucination</span>
+              <span class="tag">Sources verifiees</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="v7-slide">
+          <div class="v7-slide-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 1L1 7l11 6 11-6-11-6z"/><path d="M1 17l11 6 11-6"/><path d="M1 12l11 6 11-6"/></svg>
+          </div>
+          <div class="v7-slide-content">
+            <h3>Conclusions au fond</h3>
+            <p>Redigez des conclusions au fond structurees et conformes aux exigences du CPC. Le Skill organise le visa des textes, l'expose des faits, la discussion juridique et le dispositif. Distinction automatique entre moyens principaux et subsidiaires. Exemple : un jeu complet de conclusions de 15 pages en 20 minutes.</p>
+            <div class="v7-slide-meta">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                3h gagnees
+              </span>
+              <span class="tag">Conformite CPC</span>
+              <span class="tag">Textes vises verifies</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="v7-slide">
+          <div class="v7-slide-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="v7-slide-content">
+            <h3>Analyse jurisprudentielle</h3>
+            <p>Recherche approfondie de jurisprudence avec verification systematique de chaque reference. Chaque decision est accompagnee de sa portee, de son contexte et de son actualite. Le Skill ne cite jamais une decision qu'il ne peut pas verifier. Exemple : 8 arrets pertinents identifies et synthetises en 10 minutes pour un litige en construction.</p>
+            <div class="v7-slide-meta">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                1h30 gagnees
+              </span>
+              <span class="tag">Anti-hallucination</span>
+              <span class="tag">References verifiees</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="v7-slide">
+          <div class="v7-slide-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="v7-slide-content">
+            <h3>Mise en demeure</h3>
+            <p>Redigez des mises en demeure formelles en quelques minutes. Le Skill integre les mentions obligatoires, adapte les references legales au litige et propose le ton adapte (amiable, ferme, contentieux imminent). Exemple : une mise en demeure pour impaye locatif generee et prete a envoyer en 5 minutes.</p>
+            <div class="v7-slide-meta">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                30 min gagnees
+              </span>
+              <span class="tag">Mentions obligatoires</span>
+              <span class="tag">Ton adapte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="v7-nav">
+        <button class="v7-arrow" id="v7-prev" aria-label="Skill precedent">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="v7-dots" id="v7-dots">
+          <span class="v7-dot active" data-slide="0"></span>
+          <span class="v7-dot" data-slide="1"></span>
+          <span class="v7-dot" data-slide="2"></span>
+          <span class="v7-dot" data-slide="3"></span>
+          <span class="v7-dot" data-slide="4"></span>
+        </div>
+        <span class="v7-counter" id="v7-counter">1 / 5</span>
+        <button class="v7-arrow" id="v7-next" aria-label="Skill suivant">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ---- Scripts ---- -->
+<script src="../styles/base.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---- V2: Scroll dot sync ---- */
+  const v2Track = document.getElementById('v2-track');
+  const v2Dots = document.querySelectorAll('#v2-dots .v2-dot');
+  if (v2Track && v2Dots.length) {
+    v2Track.addEventListener('scroll', () => {
+      const scrollLeft = v2Track.scrollLeft;
+      const cardWidth = 360;
+      const activeIndex = Math.round(scrollLeft / cardWidth);
+      v2Dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+    });
+    v2Dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        v2Track.scrollTo({ left: i * 360, behavior: 'smooth' });
+      });
+    });
+  }
+
+  /* ---- V7: Carousel ---- */
+  const v7Slides = document.getElementById('v7-slides');
+  const v7Prev = document.getElementById('v7-prev');
+  const v7Next = document.getElementById('v7-next');
+  const v7Dots = document.querySelectorAll('#v7-dots .v7-dot');
+  const v7Counter = document.getElementById('v7-counter');
+  let v7Current = 0;
+  const v7Total = 5;
+
+  function v7GoTo(index) {
+    v7Current = ((index % v7Total) + v7Total) % v7Total;
+    v7Slides.style.transform = `translateX(-${v7Current * 100}%)`;
+    v7Dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === v7Current);
+    });
+    v7Counter.textContent = `${v7Current + 1} / ${v7Total}`;
+  }
+
+  if (v7Prev && v7Next) {
+    v7Prev.addEventListener('click', () => v7GoTo(v7Current - 1));
+    v7Next.addEventListener('click', () => v7GoTo(v7Current + 1));
+  }
+  v7Dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      v7GoTo(parseInt(dot.dataset.slide, 10));
+    });
+  });
+
+  /* Optional auto-play */
+  let v7AutoPlay = setInterval(() => v7GoTo(v7Current + 1), 6000);
+  const v7Carousel = document.querySelector('.v7-carousel');
+  if (v7Carousel) {
+    v7Carousel.addEventListener('mouseenter', () => clearInterval(v7AutoPlay));
+    v7Carousel.addEventListener('mouseleave', () => {
+      v7AutoPlay = setInterval(() => v7GoTo(v7Current + 1), 6000);
+    });
+  }
+
+});
+</script>
+
+</body>
+</html>

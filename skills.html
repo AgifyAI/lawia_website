@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LawIA : Les 6 Skills du Pack</title>
+  <meta name="description"
+    content="D&eacute;couvrez les 5+1 Skills Claude inclus dans le pack LawIA. Assignation juridique, contre-argumentation, convention d'honoraires, bordereau de pi&egrave;ces, consultation juridique et v&eacute;rificateur de sources.">
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    /* ============================================================
+       SKILLS PAGE : Navigation (same as index)
+       ============================================================ */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .site-nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .site-nav-logo span {
+      color: var(--accent);
+    }
+
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .site-nav-links a {
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .site-nav-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    .site-nav-links .nav-cta {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--accent);
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+
+    .site-nav-links .nav-cta:hover {
+      background: var(--accent-dark);
+      color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        padding: 0 var(--space-md);
+      }
+
+      .site-nav-links a:not(.nav-cta) {
+        display: none;
+      }
+    }
+
+    /* ============================================================
+       SKILLS PAGE : Hero
+       ============================================================ */
+    .skills-hero {
+      padding-top: calc(60px + var(--space-5xl));
+      padding-bottom: var(--space-4xl);
+    }
+
+    .skills-hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3xl);
+    }
+
+    .skills-hero-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .skills-hero-right {
+      flex-shrink: 0;
+      width: 42%;
+      max-width: 420px;
+    }
+
+    .skills-hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    }
+
+    .skills-hero .hero-subtitle {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-top: var(--space-lg);
+    }
+
+    /* Orbit animation */
+    .orbit-visual {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .orbit-line {
+      animation: orbit-dash 25s linear infinite;
+    }
+
+    @keyframes orbit-dash {
+      to { stroke-dashoffset: -120; }
+    }
+
+    @media (max-width: 768px) {
+      .skills-hero {
+        padding-top: calc(60px + var(--space-3xl));
+        padding-bottom: var(--space-2xl);
+      }
+
+      .skills-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xl);
+      }
+
+      .skills-hero-right {
+        width: 100%;
+        max-width: 340px;
+        align-self: center;
+      }
+    }
+
+    /* ============================================================
+       SKILLS PAGE : Cards Grid
+       ============================================================ */
+    .skills-section {
+      padding-bottom: var(--space-5xl);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .skill-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: var(--space-2xl);
+      transition: all var(--dur-normal) var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .skill-card:hover {
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+    }
+
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .skill-card-category {
+      display: inline-block;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+    }
+
+    .skill-card-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      flex-shrink: 0;
+    }
+
+    .skill-card-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent-dark);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .skill-card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      line-height: 1.3;
+    }
+
+    .skill-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      flex-grow: 1;
+    }
+
+    .skill-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+
+    .skill-card-tag {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      background: var(--bg-alt);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+    }
+
+    /* Bonus card variant */
+    .skill-card--bonus {
+      background: var(--accent-light);
+      border-color: var(--accent);
+    }
+
+    .skill-card--bonus:hover {
+      border-color: var(--accent-dark);
+    }
+
+    .skill-card--bonus .skill-card-category {
+      color: var(--accent-dark);
+    }
+
+    .skill-card-bonus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--accent);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Skill card clickable */
+    .skill-card {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .skill-card-play {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: var(--space-sm);
+      transition: color var(--dur-fast);
+    }
+
+    .skill-card-play svg {
+      width: 16px;
+      height: 16px;
+      transition: transform var(--dur-fast);
+    }
+
+    .skill-card:hover .skill-card-play {
+      color: var(--accent-dark);
+    }
+
+    .skill-item.is-open .skill-card-play svg {
+      transform: rotate(90deg);
+    }
+
+    /* Accordion video container */
+    .skill-video {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-item.is-open .skill-video {
+      max-height: 500px;
+    }
+
+    .skill-video-inner {
+      padding: var(--space-md) 0 0;
+    }
+
+    .skill-video-inner iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Open state card styling */
+    .skill-item.is-open .skill-card {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 768px) {
+      .skills-section {
+        padding-bottom: var(--space-3xl);
+      }
+
+      .skill-card {
+        padding: var(--space-xl);
+      }
+    }
+
+    /* ============================================================
+       FOOTER (same as index)
+       ============================================================ */
+    .site-footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: var(--space-4xl) 0 var(--space-2xl);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-3xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .footer-brand h3 {
+      color: var(--white);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-brand h3 span {
+      color: var(--accent);
+    }
+
+    .footer-brand p {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 0.95rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-col ul li a {
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .footer-bottom a:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: var(--space-lg);
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       Site Navigation
+       ============================================================ -->
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-logo">LAW<span>IA</span></a>
+    <div class="site-nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#features">Les 5 Skills</a>
+      <a href="index.html#pricing">Prix</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#pricing" class="nav-cta">Obtenir le pack (150&nbsp;&euro;)</a>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="skills-hero">
+    <div class="container">
+      <div class="skills-hero-inner">
+        <div class="skills-hero-left anim-slide-up">
+          <h1>Les Skills du Pack</h1>
+          <p class="hero-subtitle">
+            Des instructions pr&ecirc;tes &agrave; l'emploi pour transformer la pratique juridique de votre cabinet.
+          </p>
+        </div>
+        <div class="skills-hero-right anim-fade-in" style="transition-delay: 300ms;">
+
+          <svg class="orbit-visual" viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <defs>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+              </filter>
+            </defs>
+
+            <!-- Connection lines (dashed, flowing) -->
+            <line class="orbit-line" x1="190" y1="160" x2="315" y2="42" stroke="rgba(106,155,204,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <line class="orbit-line" x1="190" y1="160" x2="62" y2="55" stroke="rgba(106,155,204,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <line class="orbit-line" x1="190" y1="160" x2="320" y2="275" stroke="rgba(106,155,204,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <line class="orbit-line" x1="190" y1="160" x2="65" y2="268" stroke="rgba(106,155,204,0.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+
+            <!-- Outward pulse dots (Claude → Tools) -->
+            <circle r="3.5" fill="#6A9BCC">
+              <animateMotion dur="2.8s" repeatCount="indefinite" path="M190,160 L315,42"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1" dur="2.8s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3.5" fill="#6A9BCC">
+              <animateMotion dur="3.2s" begin="0.7s" repeatCount="indefinite" path="M190,160 L62,55"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1" dur="3.2s" begin="0.7s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3.5" fill="#6A9BCC">
+              <animateMotion dur="3.0s" begin="1.4s" repeatCount="indefinite" path="M190,160 L320,275"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1" dur="3.0s" begin="1.4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3.5" fill="#6A9BCC">
+              <animateMotion dur="3.4s" begin="2.1s" repeatCount="indefinite" path="M190,160 L65,268"/>
+              <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.08;0.85;1" dur="3.4s" begin="2.1s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- Inward pulse dots (Tools → Claude) -->
+            <circle r="3" fill="#4E7FAF">
+              <animateMotion dur="3.0s" begin="1.4s" repeatCount="indefinite" path="M315,42 L190,160"/>
+              <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.85;1" dur="3.0s" begin="1.4s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#4E7FAF">
+              <animateMotion dur="3.4s" begin="2.0s" repeatCount="indefinite" path="M62,55 L190,160"/>
+              <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.85;1" dur="3.4s" begin="2.0s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#4E7FAF">
+              <animateMotion dur="2.8s" begin="2.5s" repeatCount="indefinite" path="M320,275 L190,160"/>
+              <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.85;1" dur="2.8s" begin="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="3" fill="#4E7FAF">
+              <animateMotion dur="3.2s" begin="3.0s" repeatCount="indefinite" path="M65,268 L190,160"/>
+              <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.85;1" dur="3.2s" begin="3.0s" repeatCount="indefinite"/>
+            </circle>
+
+            <!-- ═══ Tool Nodes ═══ -->
+
+            <!-- Word (top-right) -->
+            <circle cx="315" cy="42" r="26" fill="white" stroke="rgba(43,87,154,0.25)" stroke-width="1.5"/>
+            <text x="315" y="40" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#2B579A">W</text>
+            <text x="315" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#8A8A82">Word</text>
+
+            <!-- Lexbase (top-left) -->
+            <circle cx="62" cy="55" r="26" fill="white" stroke="rgba(26,143,110,0.25)" stroke-width="1.5"/>
+            <text x="62" y="53" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#1A8F6E">Lx</text>
+            <text x="62" y="91" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#8A8A82">Lexbase</text>
+
+            <!-- Doctrine (bottom-right) -->
+            <circle cx="320" cy="275" r="26" fill="white" stroke="rgba(123,63,160,0.25)" stroke-width="1.5"/>
+            <text x="320" y="273" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#7B3FA0">Dc</text>
+            <text x="320" y="311" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#8A8A82">Doctrine</text>
+
+            <!-- L&eacute;gifrance (bottom-left) -->
+            <circle cx="65" cy="268" r="26" fill="white" stroke="rgba(207,69,32,0.25)" stroke-width="1.5"/>
+            <text x="65" y="266" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#CF4520">Lf</text>
+            <text x="65" y="304" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#8A8A82">L&eacute;gifrance</text>
+
+            <!-- ═══ Claude Center ═══ -->
+
+            <!-- Breathing glow halo -->
+            <circle cx="190" cy="160" r="44" fill="#6A9BCC" opacity="0.15" filter="url(#glow)">
+              <animate attributeName="r" values="44;52;44" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+              <animate attributeName="opacity" values="0.15;0.35;0.15" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+            </circle>
+
+            <!-- Second subtle ring -->
+            <circle cx="190" cy="160" r="50" fill="none" stroke="rgba(106,155,204,0.08)" stroke-width="1">
+              <animate attributeName="r" values="50;56;50" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+            </circle>
+
+            <!-- Main circle -->
+            <circle cx="190" cy="160" r="38" fill="#6A9BCC"/>
+
+            <!-- Highlight gradient overlay -->
+            <circle cx="190" cy="160" r="38" fill="url(#none)" opacity="0"/>
+
+            <!-- Text -->
+            <text x="190" y="155" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="white" letter-spacing="-0.02em">Claude</text>
+            <text x="190" y="172" text-anchor="middle" dominant-baseline="middle" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.65)">AI</text>
+          </svg>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SKILLS GRID
+       ============================================================ -->
+  <section class="skills-section">
+    <div class="container">
+      <div class="skills-grid stagger">
+
+        <!-- Skill 1 : Assignation juridique -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_ASSIGNATION">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-card-category">Proc&eacute;dure</span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">Assignation juridique</h3>
+            <p class="skill-card-desc">
+              G&eacute;n&eacute;rez des assignations juridiques structur&eacute;es et conformes aux exigences du Code de
+              proc&eacute;dure civile. Le Skill organise automatiquement les mentions obligatoires, l'expos&eacute; des
+              faits et les demandes.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">Assignation</span>
+              <span class="skill-card-tag">Proc&eacute;dure civile</span>
+              <span class="skill-card-tag">Tribunal</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+        <!-- Skill 2 : Contre-argumentation judiciaire -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_CONTRE_ARGUMENTATION">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-card-category">Argumentation</span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">Contre-argumentation judiciaire</h3>
+            <p class="skill-card-desc">
+              Analysez les conclusions adverses point par point et construisez une contre-argumentation
+              structur&eacute;e avec identification des failles juridiques et logiques, r&eacute;f&eacute;rences aux
+              textes et jurisprudences.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">Contentieux</span>
+              <span class="skill-card-tag">Argumentation</span>
+              <span class="skill-card-tag">Conclusions</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+        <!-- Skill 3 : Convention d'honoraires -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_CONVENTION">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-card-category">Gestion cabinet</span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2" y="3" width="20" height="18" rx="2" />
+                  <line x1="2" y1="9" x2="22" y2="9" />
+                  <line x1="9" y1="3" x2="9" y2="9" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">Convention d'honoraires</h3>
+            <p class="skill-card-desc">
+              G&eacute;n&eacute;rez des conventions d'honoraires personnalis&eacute;es et conformes &agrave; la
+              r&eacute;glementation en vigueur, avec les mentions impos&eacute;es par la loi du 31 d&eacute;cembre 1971
+              et le d&eacute;cret du 12 juillet 2005.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">Honoraires</span>
+              <span class="skill-card-tag">Convention</span>
+              <span class="skill-card-tag">Conformit&eacute;</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+        <!-- Skill 4 : Bordereau de pièces -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_BORDEREAU">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-card-category">Proc&eacute;dure</span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 1L1 7l11 6 11-6-11-6z" />
+                  <path d="M1 17l11 6 11-6" />
+                  <path d="M1 12l11 6 11-6" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">Bordereau de pi&egrave;ces</h3>
+            <p class="skill-card-desc">
+              Constituez un bordereau de pi&egrave;ces organis&eacute; et conforme aux standards des juridictions.
+              Le Skill num&eacute;rote, classe et r&eacute;f&eacute;rence chaque pi&egrave;ce avec pr&eacute;cision.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">Bordereau</span>
+              <span class="skill-card-tag">Pi&egrave;ces</span>
+              <span class="skill-card-tag">Organisation</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+        <!-- Skill 5 : Consultation juridique -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_CONSULTATION">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-card-category">Conseil</span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">Consultation juridique</h3>
+            <p class="skill-card-desc">
+              R&eacute;digez des consultations juridiques structur&eacute;es &agrave; partir des &eacute;l&eacute;ments du
+              dossier. Le Skill analyse les faits, identifie les r&egrave;gles applicables et formule un avis
+              motiv&eacute;.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">Consultation</span>
+              <span class="skill-card-tag">Analyse</span>
+              <span class="skill-card-tag">Avis</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+        <!-- Skill 6 (BONUS) : Vérificateur de sources -->
+        <div class="skill-item anim-scale-in" data-video="VIDEO_ID_VERIFICATEUR">
+          <div class="skill-card skill-card--bonus">
+            <div class="skill-card-header">
+              <span class="skill-card-bonus-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                Bonus
+              </span>
+              <div class="skill-card-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="skill-card-title">V&eacute;rificateur de sources</h3>
+            <p class="skill-card-desc">
+              V&eacute;rifiez la fiabilit&eacute; de vos r&eacute;f&eacute;rences juridiques. Le Skill contr&ocirc;le
+              l'existence et l'actualit&eacute; des articles de loi, des d&eacute;cisions de justice et des
+              r&eacute;f&eacute;rences doctrinales cit&eacute;es.
+            </p>
+            <div class="skill-card-tags">
+              <span class="skill-card-tag">V&eacute;rification</span>
+              <span class="skill-card-tag">Sources</span>
+              <span class="skill-card-tag">Anti-hallucination</span>
+            </div>
+            <div class="skill-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Voir la d&eacute;mo
+            </div>
+          </div>
+          <div class="skill-video">
+            <div class="skill-video-inner"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>LAW<span>IA</span></h3>
+          <p>Pack de 5 Skills Claude con&ccedil;us par Me Patrice Humbert pour transformer la pratique juridique des
+            avocats gr&acirc;ce &agrave; l'intelligence artificielle.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#features">Les 5 Skills</a></li>
+            <li><a href="index.html#social-proof">Me Humbert</a></li>
+            <li><a href="index.html#pricing">Prix</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@lawia.fr">contact@lawia.fr</a></li>
+            <li><a href="#">Mentions l&eacute;gales</a></li>
+            <li><a href="#">CGV</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2025 LAWIA SAS. Tous droits r&eacute;serv&eacute;s.</span>
+        <div class="footer-legal-links">
+          <span>SIREN 990 961 120</span>
+          <span>11 Boulevard Emile Combes, 13200 Arles</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       Scripts
+       ============================================================ -->
+  <script src="styles/base.js"></script>
+  <script>
+    document.querySelectorAll('.skill-item').forEach(function (item) {
+      var card = item.querySelector('.skill-card');
+      var videoInner = item.querySelector('.skill-video-inner');
+      var videoId = item.getAttribute('data-video');
+
+      card.addEventListener('click', function () {
+        var wasOpen = item.classList.contains('is-open');
+
+        // Close all other open items
+        document.querySelectorAll('.skill-item.is-open').forEach(function (openItem) {
+          openItem.classList.remove('is-open');
+          // Remove iframe to stop playback
+          var inner = openItem.querySelector('.skill-video-inner');
+          inner.innerHTML = '';
+        });
+
+        // Toggle current item
+        if (!wasOpen) {
+          item.classList.add('is-open');
+          // Lazy-load the YouTube iframe
+          videoInner.innerHTML =
+            '<iframe src="https://www.youtube.com/embed/' + videoId +
+            '?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
