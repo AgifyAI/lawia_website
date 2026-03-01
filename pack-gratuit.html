@@ -854,11 +854,12 @@
     const heroForm = document.getElementById('hero-form');
     const finalForm = document.getElementById('final-form');
 
-    const LOOPS_API_KEY = '2ee1a573fa40dde6507ec36ddaee4c41'; /* Remplacer par ta cle API Loops */
+    /* Remplacer par ton Form ID Loops (Forms > ton formulaire > ID dans l'URL) */
+    var LOOPS_FORM_ID = 'YOUR_FORM_ID';
 
     function showSuccess(form) {
-      const btn = form.querySelector('.btn-primary');
-      const input = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('.btn-primary');
+      var input = form.querySelector('input[type="email"]');
       btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Envoy\u00e9\u00a0!';
       btn.style.background = 'var(--green)';
       btn.style.pointerEvents = 'none';
@@ -867,7 +868,7 @@
     }
 
     function showError(form) {
-      const btn = form.querySelector('.btn-primary');
+      var btn = form.querySelector('.btn-primary');
       btn.innerHTML = 'Erreur, r\u00e9essayez';
       btn.style.background = 'var(--red, #c0392b)';
       setTimeout(function () {
@@ -879,30 +880,21 @@
 
     async function handleFormSubmit(e) {
       e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value;
-      const btn = e.target.querySelector('.btn-primary');
+      var email = e.target.querySelector('input[type="email"]').value;
+      var btn = e.target.querySelector('.btn-primary');
       btn.style.pointerEvents = 'none';
       btn.innerHTML = 'Envoi\u2026';
 
       try {
-        const res = await fetch('https://app.loops.so/api/v1/events/send', {
+        var res = await fetch('https://app.loops.so/api/newsletter-form/' + LOOPS_FORM_ID, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + LOOPS_API_KEY
-          },
-          body: JSON.stringify({
-            email: email,
-            eventName: 'skills_lm'
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, mailingLists: { cmm7lrf99swh90j343p631ktr: true } })
         });
 
         if (!res.ok) throw new Error(res.status);
 
-        const otherForm = e.target === heroForm ? finalForm : heroForm;
-        otherForm.querySelector('input[type="email"]').value = email;
-        showSuccess(e.target);
-        showSuccess(otherForm);
+        window.location.href = 'merci.html';
       } catch (err) {
         showError(e.target);
       }

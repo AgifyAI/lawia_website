@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci ! Votre pack est en route | LawIA</title>
+  <meta name="description" content="Votre pack gratuit de Skills juridiques IA est en route. V&eacute;rifiez votre bo&icirc;te mail.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="styles/base.css">
+  <style>
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(250, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .site-nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .site-nav-logo span {
+      color: var(--accent);
+    }
+
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .site-nav-links a {
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .site-nav-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    @media (max-width: 768px) {
+      .site-nav {
+        padding: 0 var(--space-md);
+      }
+    }
+
+    /* Thank you content */
+    .thankyou-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 60px;
+      background: var(--bg);
+    }
+
+    .thankyou-card {
+      text-align: center;
+      max-width: 560px;
+      padding: var(--space-3xl) var(--space-xl);
+    }
+
+    .thankyou-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(92, 160, 110, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-xl);
+    }
+
+    .thankyou-icon svg {
+      width: 36px;
+      height: 36px;
+      color: var(--green);
+    }
+
+    .thankyou-card h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin-bottom: var(--space-lg);
+    }
+
+    .thankyou-card p {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .thankyou-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+      text-align: left;
+    }
+
+    .thankyou-steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .thankyou-back {
+      margin-top: var(--space-3xl);
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: var(--space-4xl) 0 var(--space-xl);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    .footer-brand h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-brand h3 span {
+      color: var(--accent);
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: var(--space-sm);
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer-col a {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .footer-col a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      margin-top: var(--space-3xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: var(--space-lg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-logo">LAW<span>IA</span></a>
+    <div class="site-nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#features">Les 5 Skills</a>
+    </div>
+  </nav>
+
+  <main class="thankyou-wrapper">
+    <div class="thankyou-card anim-slide-up">
+
+      <div class="thankyou-icon anim-scale-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+
+      <h1>Merci, c'est envoy&eacute;&nbsp;!</h1>
+
+      <p>
+        Votre pack gratuit de <strong>Skills juridiques IA</strong> arrive dans votre bo&icirc;te mail.
+      </p>
+
+      <ul class="thankyou-steps">
+        <li>
+          <span class="step-number">1</span>
+          <span>V&eacute;rifiez votre bo&icirc;te de r&eacute;ception (et vos spams, au cas o&ugrave;)</span>
+        </li>
+        <li>
+          <span class="step-number">2</span>
+          <span>T&eacute;l&eacute;chargez les Skills et installez-les dans Claude</span>
+        </li>
+        <li>
+          <span class="step-number">3</span>
+          <span>Testez-les sur un vrai dossier : vous verrez la diff&eacute;rence</span>
+        </li>
+      </ul>
+
+      <div class="thankyou-back">
+        <a href="index.html" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M14 9H4m0 0l4 4m-4-4l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          Retour &agrave; l'accueil
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>LAW<span>IA</span></h3>
+          <p>Pack de Skills Claude con&ccedil;us par Me Patrice Humbert pour transformer la pratique juridique des
+            avocats gr&acirc;ce &agrave; l'intelligence artificielle.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#features">Les 5 Skills</a></li>
+            <li><a href="index.html#pricing">Prix</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@lawia.fr">contact@lawia.fr</a></li>
+            <li><a href="#">Mentions l&eacute;gales</a></li>
+            <li><a href="#">CGV</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 LAWIA SAS. Tous droits r&eacute;serv&eacute;s.</span>
+        <div class="footer-legal-links">
+          <span>SIREN 990 961 120</span>
+          <span>11 Boulevard Emile Combes, 13200 Arles</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="styles/base.js"></script>
+
+</body>
+
+</html>
