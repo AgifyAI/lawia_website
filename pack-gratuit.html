@@ -558,7 +558,8 @@
       </span>
 
       <h1 class="mt-xl anim-slide-up">
-        Nos <span style="color: var(--accent);">Skills</span> gratuits pour transformer votre pratique juridique avec l'IA
+        Nos <span style="color: var(--accent);">Skills</span> gratuits pour transformer votre pratique juridique avec
+        l'IA
       </h1>
 
       <p class="hero-subtitle mt-lg anim-slide-up">
@@ -637,7 +638,8 @@
           </div>
           <h3>Template DOCX juridique</h3>
           <p>
-            Un mod&egrave;le d'assignation pr&ecirc;t &agrave; l'emploi, structur&eacute; selon les standards du barreau.
+            Un mod&egrave;le d'assignation pr&ecirc;t &agrave; l'emploi, structur&eacute; selon les standards du
+            barreau.
             Copiez, collez, adaptez : vous gagnez 1h sur chaque acte.
           </p>
         </div>
@@ -852,42 +854,58 @@
     const heroForm = document.getElementById('hero-form');
     const finalForm = document.getElementById('final-form');
 
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value;
+    const LOOPS_API_KEY = '2ee1a573fa40dde6507ec36ddaee4c41'; /* Remplacer par ta cle API Loops */
 
-      /*
-        TODO: Replace with your email service integration.
-        Options: Mailchimp, ConvertKit, Tally, Formspree, etc.
-        Example with Formspree:
-          fetch('https://formspree.io/f/YOUR_ID', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
-          })
-      */
-
-      /* Show success state */
-      const btn = e.target.querySelector('.btn-primary');
-      const originalHTML = btn.innerHTML;
+    function showSuccess(form) {
+      const btn = form.querySelector('.btn-primary');
+      const input = form.querySelector('input[type="email"]');
       btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Envoy\u00e9\u00a0!';
       btn.style.background = 'var(--green)';
       btn.style.pointerEvents = 'none';
-
-      const input = e.target.querySelector('input[type="email"]');
       input.disabled = true;
       input.style.opacity = '0.6';
+    }
 
-      /* Also disable the other form */
-      const otherForm = e.target === heroForm ? finalForm : heroForm;
-      const otherBtn = otherForm.querySelector('.btn-primary');
-      const otherInput = otherForm.querySelector('input[type="email"]');
-      otherInput.value = email;
-      otherInput.disabled = true;
-      otherInput.style.opacity = '0.6';
-      otherBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Envoy\u00e9\u00a0!';
-      otherBtn.style.background = 'var(--green)';
-      otherBtn.style.pointerEvents = 'none';
+    function showError(form) {
+      const btn = form.querySelector('.btn-primary');
+      btn.innerHTML = 'Erreur, r\u00e9essayez';
+      btn.style.background = 'var(--red, #c0392b)';
+      setTimeout(function () {
+        btn.innerHTML = 'Recevoir le pack <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.style.background = '';
+        btn.style.pointerEvents = '';
+      }, 3000);
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      const btn = e.target.querySelector('.btn-primary');
+      btn.style.pointerEvents = 'none';
+      btn.innerHTML = 'Envoi\u2026';
+
+      try {
+        const res = await fetch('https://app.loops.so/api/v1/events/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + LOOPS_API_KEY
+          },
+          body: JSON.stringify({
+            email: email,
+            eventName: 'skills_lm'
+          })
+        });
+
+        if (!res.ok) throw new Error(res.status);
+
+        const otherForm = e.target === heroForm ? finalForm : heroForm;
+        otherForm.querySelector('input[type="email"]').value = email;
+        showSuccess(e.target);
+        showSuccess(otherForm);
+      } catch (err) {
+        showError(e.target);
+      }
     }
 
     heroForm.addEventListener('submit', handleFormSubmit);
