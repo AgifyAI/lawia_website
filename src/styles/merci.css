@@ -1,0 +1,87 @@
+/* ============================================================
+   MERCI PAGE
+   ============================================================ */
+.merci-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  background: var(--bg);
+}
+
+.merci-card {
+  text-align: center;
+  max-width: 520px;
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.merci-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(92, 160, 110, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-xl);
+}
+
+.merci-icon svg {
+  width: 36px;
+  height: 36px;
+  color: var(--green);
+}
+
+.merci-card h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin-bottom: var(--space-md);
+}
+
+.merci-card .subtitle {
+  font-size: 1.05rem;
+  max-width: 420px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.merci-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: left;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  padding: var(--space-xl);
+}
+
+.merci-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.merci-back {
+  margin-top: var(--space-2xl);
+}

@@ -1,0 +1,76 @@
+/* ============================================================
+   LAWIA — Site Navigation (shared)
+   ============================================================ */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(250, 249, 245, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.site-nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.site-nav-logo span {
+  color: var(--accent);
+}
+
+.site-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.site-nav-links a {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--dur-fast);
+}
+
+.site-nav-links a:hover {
+  color: var(--accent-dark);
+}
+
+.site-nav-links .nav-cta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--accent);
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.site-nav-links .nav-cta:hover {
+  background: var(--accent-dark);
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .site-nav {
+    padding: 0 var(--space-md);
+  }
+
+  .site-nav-links a:not(.nav-cta) {
+    display: none;
+  }
+}
